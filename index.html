@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Search</title>
     <style>
         body {
@@ -99,6 +100,22 @@
         }
         .rightlinks a {
             margin-left: 15px;
+        }
+        @media screen and (max-width: 600px) {
+            input[type="text"] {
+                width: 90%; /* Adjust width to fit smaller screens */
+                border-radius: 20px; /* Make the border-radius proportional */
+            }
+            #goo {
+                font-size: 40px; /* Reduce font size for smaller displays */
+            }
+            .button-container {
+                flex-direction: column; /* Stack buttons vertically on small screens */
+            }
+            input[type="submit"] {
+                width: 90%; /* Adjust width to fit smaller screens */
+                margin-bottom: 10px; /* Add space between stacked buttons */
+            }
         }
     </style>
 </head>
