@@ -1,0 +1,10 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Error
+{% endblock %}
+
+{% block body %}
+    <h1> The entry doesn't exist </h1>
+    <h2> You can <a href="{% url 'create' %}"> Create it </a> if you want to! </h2>
+{% endblock %}
