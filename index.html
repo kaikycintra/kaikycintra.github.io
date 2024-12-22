@@ -18,21 +18,27 @@
         }
         .content {
             background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 8px;
+            height: auto;
+            margin-left: 30px;
+            margin-right: 30px;
+            padding: 40px;
+            border-radius: 2vh;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         label, input, button {
             display: block;
             width: 100%;
             margin-bottom: 10px;
+            font-size: 3vh;
+
         }
         button {
             background-color: #007BFF;
             color: #fff;
             border: none;
             padding: 10px;
-            border-radius: 4px;
+            height: 10vh;
+            border-radius: 1vh;
             cursor: pointer;
         }
         button:hover, button:active {
@@ -41,9 +47,12 @@
         .result {
             background-color: #fff;
         }
+        h1 {
+            font-size: 4vh;
+        }
         p {
             margin-top: 20px;
-            font-size: 1.2em;
+            font-size: 3vh;
         }
         #funny-text {
             display: none;
@@ -52,6 +61,7 @@
 </head>
 <body>
     <div class="content">
+        <h1>Amigo Secreto dos 5 Henriques e Nenezera</h1>
         <form id="decodeForm">
             <label for="code">Seu código:</label><br>
             <input type="text" id="code" required><br>
