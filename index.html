@@ -2,8 +2,93 @@
 <html lang="pt-br">
     <head>
         <title>Kaiky</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- HTMX -->
+        <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+        
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
+
+        <!-- Navbar CSS -->
+        <link rel="stylesheet" href="navbar.css">
     </head>
+
+    <style>
+      body {
+        font-family: 'Inconsolata', monospace;
+      }
+
+      main {
+          padding: 15px;
+          flex-grow: 1;  
+      }
+
+      a:hover {
+        cursor: pointer;
+      }
+
+      #navbarNavDropdown {
+        padding: 0px 12px 0px 12px;
+        margin-top: 10px;
+      }
+    </style>
     <body>
-        <h1> Oi! </h1>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+                crossorigin="anonymous">
+        </script>
+        
+        <nav class="navbar navbar-expand-md bg-body-secondary">
+          <div class="container-fluid">
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="toggler-icon top-bar"></span>
+              <span class="toggler-icon middle-bar"></span>
+              <span class="toggler-icon bottom-bar"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-md-center" id="navbarNavDropdown">
+              <ul class="navbar-nav nav-underline">
+                <li class="nav-item">
+                  <a class="nav-link"
+                     hx-get="home.html"
+                     hx-target="next main"
+                     hx-swap="outerHTML">
+                     Início
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"
+                     hx-get="projetos.html"
+                     hx-target="next main"
+                     hx-swap="outerHTML">
+                     Projetos
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"
+                     hx-get="blog.html"
+                     hx-target="next main"
+                     hx-swap="outerHTML">
+                     Blog
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <main>
+            <div hx-get="home.html"
+                 hx-target="closest main"
+                 hx-swap="outerHTML"
+                 hx-trigger="load">
+            </div>
+        </main>
     </body>
 </html>
