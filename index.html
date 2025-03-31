@@ -22,11 +22,18 @@
     <style>
       body {
         font-family: 'Inconsolata', monospace;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       main {
-          padding: 15px;
-          flex-grow: 1;  
+          padding: 20px;
+          max-width: 768px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
       }
 
       a:hover {
@@ -44,7 +51,7 @@
                 crossorigin="anonymous">
         </script>
         
-        <nav class="navbar navbar-expand-md bg-body-secondary">
+        <nav class="navbar navbar-expand-md bg-body-secondary w-100">
           <div class="container-fluid">
             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +62,7 @@
             <div class="collapse navbar-collapse justify-content-md-center" id="navbarNavDropdown">
               <ul class="navbar-nav nav-underline">
                 <li class="nav-item">
-                  <a class="nav-link"
+                  <a class="nav-link fs-5"
                      hx-get="home.html"
                      hx-target="next main"
                      hx-swap="outerHTML">
@@ -63,14 +70,14 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link"
+                  <a class="nav-link fs-5"
                      hx-get="projetos.html"
                      hx-target="next main"
                      hx-swap="outerHTML">
                      Projetos
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item fs-5">
                   <a class="nav-link"
                      hx-get="blog.html"
                      hx-target="next main"
