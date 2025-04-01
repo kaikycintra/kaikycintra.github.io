@@ -1,12 +1,16 @@
 <main class="main-transition">
     <p class="fs-1"> Projetos</p>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="projects-div">
         <div class="col">
-          <div class="card h-100">
-            <img src="static/tralalero.jpeg" class="card-img-top" alt="tralalero tralala">
+          <div class="card h-100"
+               hx-get="index.html"
+               hx-target="#projects-div"
+               hx-swap="outerHTML">
+            <img src="static/pessoal.png" class="card-img-top" alt="site pessoal">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <h5 class="card-title">Site Pessoal</h5>
+              <p class="card-text fs-6">Site simples feito com HTMX, Alpine, Bootstrap e View Transitions API</p>
+              <p class="card-text fs-6">Contém meu CV, projetos e um blog.</p>
             </div>
           </div>
         </div>
