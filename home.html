@@ -6,45 +6,144 @@
         }
         ul.timeline:before {
             content: ' ';
-            background: #d4d9df;
-            display: inline-block;
+            background: var(--bs-dark);
             position: absolute;
             left: 29px;
             width: 2px;
             height: 100%;
+            margin-top: 0.75rem;
         }
         ul.timeline > li {
-            margin: 20px 0;
             padding-left: 20px;
         }
         ul.timeline > li:before {
             content: ' ';
             background: white;
-            display: inline-block;
             position: absolute;
             border-radius: 50%;
-            border: 3px solid #22c0e8;
+            border: 3px solid var(--bs-dark);
             left: 20px;
+            margin-top: 0.75rem;
             width: 20px;
             height: 20px;
         }
     </style>
-    <div class="container mt-5 mb-5">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <h4>Latest News</h4>
-                <ul class="timeline">
-                    <li>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
-                    </li>
-                    <li>
-                        <p>Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-                    </li>
-                    <li>
-                        <p>Fusce ullamcorper ligula sit amet quam accumsan aliquet. Sed nulla odio, tincidunt vitae nunc vitae, mollis pharetra velit. Sed nec tempor nibh...</p>
-                    </li>
-                </ul>
-            </div>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+            <p class="fs-1">Sobre mim :)</p>
+            <p class="fs-5">
+                Sou estudante de graduação de Ciência da Computação na 
+                <a href="https://en.wikipedia.org/wiki/University_of_S%C3%A3o_Paulo"
+                   target="_blank"
+                   class="link-secondary link-underline-opacity-0 link-underline-opacity-75-hover">
+                   Universidade de São Paulo.</a>
+            </p>
+            <p class="fs-5">
+                Atualmente eu trabalho com desenvolvimento mobile no
+                <a href="https://gitlab.com/interscity/bikesp/bikespapp"
+                   target="_blank"
+                   class="link-secondary link-underline-opacity-0 link-underline-opacity-75-hover">
+                   BikeSP</a>
+                e pesquisa na criação de
+                <a href="https://en.wikipedia.org/wiki/Metabolic_network_modelling"
+                   target="_blank"
+                   class="link-secondary link-underline-opacity-0 link-underline-opacity-75-hover">
+                   GEMs</a>
+                no <span class="fst-italic fs-5">Laboratory of Biochemistry of Tryps</span> no ICB-USP.
+            </p>
+            <p class="fs-5">
+                Além disso sou um dos coordenadores do grupo de extensão
+                <a href="https://codelab.ime.usp.br/#/"
+                   target="_blank"
+                   class="link-secondary link-underline-opacity-0 link-underline-opacity-75-hover">
+                   CodeLab</a>
+                no IME-USP.
+            </p>
+            <p class="fs-1">Contato</p>
+            <ul>
+                <li>
+                    <a href="https://www.linkedin.com/in/kaiky-cintra-483950246/"
+                       target="_blank"
+                       class="link-secondary link-underline-opacity-0 link-underline-opacity-75-hover fs-5">
+                    LinkedIn</a>
+                </li>
+                <li>
+                    <a href="mailto:kaikycintra@usp.br"
+                       target="_blank"
+                       class="link-secondary link-underline-opacity-0 link-underline-opacity-75-hover fs-5">
+                    kaikycintra@usp.br</a>
+                </li>
+            </ul>
+            <p class="fs-1">Falta no site</p>
+            <ul class="fs-5">
+                <li>
+                    Estado com Alpine
+                </li>
+                <li>
+                    Dark Mode
+                </li>
+                <li>
+                    Animação dos cards
+                </li>
+            </ul>
+        </div>
+        <div class="col">
+            <p class="fs-1 mb-0">Coisas que eu já fiz</p>
+            <ul class="timeline">
+                <li>
+                    <p class="fs-3">2018</p>
+                    <p class="fs-5">Menção Honrosa na Olimpíada Brasileira de Física</p>
+                    <p class="fs-5">Menção Honrosa na Olimpíada Brasileira de Química Júnior</p>
+                    <p class="fs-5">Prata na Olimpíada Brasileira do Saber</p>
+                <li>
+                    <p class="fs-3">2019</p>
+                    <p class="fs-5">Ouro na Olimpíada Brasileira de Astronomia e Astronáutica</p>
+                    <p class="fs-5">Ouro na Olimpíada Brasileira de Ciências</p>
+                </li>
+                <li>
+                    <p class="fs-3">2020</p>
+                    <p class="fs-5">Curso de Física Moderna no ICTP-SAIFR</p>
+                    <p class="fs-5">Prata na Olimpíada Brasileira de Ciências</p>
+                </li>
+                <li>
+                    <p class="fs-3">2021</p>
+                    <p class="fs-5">Menção Honrosa na Olimpíada Brasileira de Matemática das Escolas Públicas</p>
+                    <p class="fs-5">Aceito na USP em Física Biomolecular</p>
+                </li>
+                <li>
+                    <p class="fs-3">2022</p>
+                    <p class="fs-5">Posição 40 no Fecap Open
+                        <a href="https://www.worldcubeassociation.org/persons/2022CINT01"
+                        target="_blank"
+                        class="link-secondary link-underline-opacity-0 link-underline-opacity-75-hover fs-5">
+                        top 1000 WCA no Brasil na categoria 3x3 average</a>
+                    </p>
+                    <p><a href="https://schoolhouse.world/u/51559"
+                        target="_blank"
+                        class="link-secondary link-underline-opacity-0 link-underline-opacity-75-hover fs-5">
+                        Voluntário na Schoolhouse.world</a></p>
+                    <p class="fs-5">790/800 SAT de matemática</p>
+                    <p class="fs-5">966,4 em matemática no ENEM</p>
+                    <p class="fs-5">Aceito na USP em Ciência de Dados e Ciência da Computação</p>
+                </li>
+                <li>
+                    <p class="fs-3">2023</p>
+                    <p class="fs-5">Aceito na University of Toronto em Estatística e Engenharia de Computação</p>
+                    <p class="fs-5">Membro da Enactus USP São Carlos, cofundador do projeto Mirus como empresa</p>
+                    <p class="fs-5">Primeiro lugar na competição de Startups Starting-Up da USP</p>
+                </li>
+                <li>
+                    <p class="fs-3">2024</p>
+                    <p class="fs-5">Membro da LALA - Latin American Leadership Academy</p>    
+                    <p class="fs-5">Aceito na transferência de Ciência da Computação da USP na capital</p>    
+                    <p class="fs-5">Trabalho em desenvolvimento mobile no BikeSP</p>    
+                </li>
+                <li>
+                    <p class="fs-3">2025</p>
+                    <p class="fs-5">Pesquisa em criação de GEMs no LabTryps</p>
+                    <p class="fs-5">Coordenação do CodeLab</p>
+                </li>
+            </ul>
         </div>
     </div>
 </main>
