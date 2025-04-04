@@ -18,7 +18,7 @@
         <link rel="shortcut icon" href="favicon_io/favicon.ico">
         
         <!-- Navbar CSS -->
-        <link rel="stylesheet" href="navbar.css">
+        <link rel="stylesheet" href="static/navbar.css">
 
         <!-- Google Verification -->
         <meta name="google-site-verification" content="rSx-Kt8Lj0n2wg_ScNa9d11AsHKRHB1VQYwQDL_X3Nw" />
@@ -137,7 +137,7 @@
           <div class="container-fluid" id="navbar-content">
             <div class="d-flex">
               <a class="navbar-brand fs-5"
-                  hx-get="home.html"
+                  hx-get="pages/home.html"
                   hx-target="next main"
                   hx-swap="outerHTML transition:true">
                   Kaiky C.
@@ -187,7 +187,7 @@
               <ul class="navbar-nav nav-underline">
                 <li class="nav-item">
                   <a class="nav-link fs-5"
-                     hx-get="home.html"
+                     hx-get="pages/home.html"
                      hx-target="next main"
                      hx-swap="outerHTML transition:true">
                      Início
@@ -195,7 +195,7 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link fs-5"
-                     hx-get="projetos.html"
+                     hx-get="pages/projetos.html"
                      hx-target="next main"
                      hx-swap="outerHTML transition:true">
                      Projetos
@@ -203,7 +203,7 @@
                 </li>
                 <li class="nav-item fs-5">
                   <a class="nav-link"
-                     hx-get="blog.html"
+                     hx-get="pages/blog.html"
                      hx-target="next main"
                      hx-swap="outerHTML transition:true">
                      Blog
@@ -222,7 +222,7 @@
         </nav>
 
         <main class="main-transition">
-            <div hx-get="home.html"
+            <div hx-get="pages/home.html"
                  hx-target="closest main"
                  hx-swap="outerHTML transition:true"
                  hx-trigger="load">
@@ -230,13 +230,13 @@
         </main>
 
         <!-- HTMX -->
-        <script src="htmx.min.js"></script>
+        <script src="static/htmx.min.js"></script>
         
         <!-- Bootstrap -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous">
         </script>
-        <script src="bstheme.js"></script>
+        <script src="static/bstheme.js"></script>
     </body>
 </html>

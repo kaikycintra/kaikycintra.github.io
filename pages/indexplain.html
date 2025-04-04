@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-md bg-body-secondary shadow-sm w-100">
         <div class="container-fluid" id="navbar-content">
         <a class="navbar-brand fs-5"
-            hx-get="home.html"
+            hx-get="pages/home.html"
             hx-target="next main"
             hx-swap="outerHTML">
             Kaiky C.
@@ -17,7 +17,7 @@
             <ul class="navbar-nav nav-underline">
             <li class="nav-item">
                 <a class="nav-link fs-5"
-                    hx-get="home.html"
+                    hx-get="pages/home.html"
                     hx-target="next main"
                     hx-swap="outerHTML">
                     Início
@@ -25,7 +25,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link fs-5"
-                    hx-get="projetos.html"
+                    hx-get="pages/projetos.html"
                     hx-target="next main"
                     hx-swap="outerHTML">
                     Projetos
@@ -33,7 +33,7 @@
             </li>
             <li class="nav-item fs-5">
                 <a class="nav-link"
-                    hx-get="blog.html"
+                    hx-get="pages/blog.html"
                     hx-target="next main"
                     hx-swap="outerHTML">
                     Blog
@@ -52,7 +52,7 @@
     </nav>
 
     <main>
-        <div hx-get="home.html"
+        <div hx-get="pages/home.html"
                 hx-target="closest main"
                 hx-swap="outerHTML"
                 hx-trigger="load">
