@@ -87,13 +87,22 @@
       }
 
       .card {
+        box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.37);
         transition: scale 0.3s ease, box-shadow 0.3s ease;
       }
-        
+      
       .card:hover, .card:active {
-        cursor: pointer;
         scale: 1.03;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 12px 0 rgba(99, 100, 105, 0.37);
+        cursor: pointer;
+      }
+      
+      [data-bs-theme=light] .card {
+        box-shadow: 0 8px 12px 0 rgba(99, 100, 105, 0.37);
+      }
+
+      [data-bs-theme=light] .card:hover, .card:active {
+        box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.37);
       }
 
       .theme-icon-active,
@@ -140,13 +149,13 @@
           </symbol>
         </svg>
         
-        <nav class="navbar navbar-expand-md bg-body-secondary shadow-sm w-100">
+        <nav class="navbar navbar-expand-md w-100">
           <div class="container-fluid" id="navbar-content">
             <div class="d-flex">
               <a class="navbar-brand fs-5"
                   hx-get="pages/home.html"
                   hx-target="next main"
-                  hx-swap="outerHTML transition:true show:top">
+                  hx-swap="outerHTML transition:true">
                   Kaiky C.
               </a>
               <div class="d-flex align-items-center dropdown color-modes">
@@ -196,7 +205,7 @@
                   <a class="nav-link fs-5"
                      hx-get="pages/home.html"
                      hx-target="next main"
-                     hx-swap="outerHTML transition:true show:top">
+                     hx-swap="outerHTML transition:true">
                      Início
                   </a>
                 </li>
@@ -204,7 +213,7 @@
                   <a class="nav-link fs-5"
                      hx-get="pages/projetos.html"
                      hx-target="next main"
-                     hx-swap="outerHTML transition:true show:top">
+                     hx-swap="outerHTML transition:true">
                      Projetos
                   </a>
                 </li>
@@ -212,7 +221,7 @@
                   <a class="nav-link"
                      hx-get="pages/blog.html"
                      hx-target="next main"
-                     hx-swap="outerHTML transition:true show:top">
+                     hx-swap="outerHTML transition:true">
                      Blog
                   </a>
                 </li>
@@ -245,5 +254,20 @@
         crossorigin="anonymous">
         </script>
         <script src="static/bstheme.js"></script>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            const navbarCollapse = document.getElementById('navbar-nav-dropdown');
+        
+            navLinks.forEach(link => {
+              link.addEventListener('click', function () {
+                if (window.innerWidth < 768) {
+                  const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+                  bsCollapse.hide();
+                }
+              });
+            });
+          });
+        </script>
     </body>
 </html>
