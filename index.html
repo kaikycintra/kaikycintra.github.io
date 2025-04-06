@@ -25,6 +25,11 @@
     </head>
 
     <style>
+      html, body {
+        min-height: 100vh;
+        margin: 0;
+      }
+
       body {
         font-family: 'Inconsolata', monospace;
         display: flex;
@@ -36,9 +41,10 @@
           padding: 20px;
           max-width: 992px;
           width: 100%;
+          min-height: 100vh;
           display: flex;
           flex-direction: column;
-          min-height: 95vh;
+          flex: 1;
       }
 
       a:hover {
@@ -140,7 +146,7 @@
               <a class="navbar-brand fs-5"
                   hx-get="pages/home.html"
                   hx-target="next main"
-                  hx-swap="outerHTML transition:true">
+                  hx-swap="outerHTML transition:true show:top">
                   Kaiky C.
               </a>
               <div class="d-flex align-items-center dropdown color-modes">
@@ -190,7 +196,7 @@
                   <a class="nav-link fs-5"
                      hx-get="pages/home.html"
                      hx-target="next main"
-                     hx-swap="outerHTML transition:true">
+                     hx-swap="outerHTML transition:true show:top">
                      Início
                   </a>
                 </li>
@@ -198,7 +204,7 @@
                   <a class="nav-link fs-5"
                      hx-get="pages/projetos.html"
                      hx-target="next main"
-                     hx-swap="outerHTML transition:true">
+                     hx-swap="outerHTML transition:true show:top">
                      Projetos
                   </a>
                 </li>
@@ -206,7 +212,7 @@
                   <a class="nav-link"
                      hx-get="pages/blog.html"
                      hx-target="next main"
-                     hx-swap="outerHTML transition:true">
+                     hx-swap="outerHTML transition:true show:top">
                      Blog
                   </a>
                 </li>
