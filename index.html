@@ -25,6 +25,21 @@
     </head>
 
     <style>
+      :root {
+        --light-bg: rgb(170, 184, 185);
+        --dark-bg: rgb(20, 20, 20);
+      }
+
+      [data-bs-theme=light] {
+        --bs-body-bg: var(--light-bg);
+        --bs-body-bg-ops: var(--dark-bg);
+      }
+      
+      [data-bs-theme=dark] {
+        --bs-body-bg: var(--dark-bg);
+        --bs-body-bg-ops: var(--light-bg);
+      }
+      
       html, body {
         min-height: 100vh;
         margin: 0;
@@ -118,25 +133,16 @@
       }
 
       .dropdown-menu > li > button:hover {
-        background-color: var(--bs-tertiary-bg);
+        background-color: rgba(117, 117, 117, 0.315);
       }
 
       .dropdown-menu > li > button.active {
         background-color: var(--bs-tertiary-color);
       }
 
-      [data-bs-theme=dark] ul.timeline:before {
-        background: var(--bs-white);
-      }
-
-      [data-bs-theme=dark] ul.timeline > li:before {
-        background: var(--bs-dark);
-        border: 3px solid var(--bs-white);
-      }
-
       [data-bs-theme="dark"] .theme-icon,
       [data-bs-theme="dark"] .theme-icon-active {
-        fill: white;
+        fill: var(--light-bg);
       }
 
 
