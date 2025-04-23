@@ -1,0 +1,14 @@
+<div>
+    <img src="static/eu.jpg" width="100%" class="mb-1" alt="eu de óculos escuros e camiseta preta na frente da casa rosada em buenos aires">
+    <!-- Loads other pages after image loads-->
+    <div hx-get="pages/projetos.html"
+         hx-swap="none"
+         preload="preload:init"
+         preload-images="true">
+    </div>
+    <div hx-get="pages/blog.html"
+         hx-swap="none"
+         preload="preload:init"
+         preload-images="true">
+    </div>
+</div>
