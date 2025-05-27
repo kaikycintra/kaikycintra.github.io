@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Custom CLI to run development scripts
+case "$1" in
+  setup)
+    ./scripts/setup.sh
+    ;;
+  checkdate)
+    ./scripts/checkdate.sh
+    ;;
+  changedate)
+    ./scripts/changedate.sh
+    ;;
+  *)
+    echo "Usage: $0 {setup|checkdate|changedate}"
+    exit 1
+    ;;
+esac

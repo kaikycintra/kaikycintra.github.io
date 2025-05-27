@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Run the checkdate script
+./scripts/checkdate.sh
+
+# Capture the result
+if ! ./scripts/checkdate.sh | grep -q "already current"; then
+    echo "❌ Push aborted: 'Last Updated' date is not current."
+    echo "➡️  Please run ./scripts/changedate.sh to update it."
+    exit 1
+fi
+
+# If date is current, allow push
+exit 0
