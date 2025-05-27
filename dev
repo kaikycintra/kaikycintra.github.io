@@ -11,8 +11,11 @@ case "$1" in
   changedate)
     ./scripts/changedate.sh
     ;;
+  404)
+    cp index.html 404.html
+    ;;
   *)
-    echo "Usage: $0 {setup|checkdate|changedate}"
+    echo "Usage: $0 {setup|checkdate|changedate|404}"
     exit 1
     ;;
 esac

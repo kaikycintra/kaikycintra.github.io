@@ -1,14 +1,21 @@
 #!/bin/bash
 
-# Run the checkdate script
-./scripts/checkdate.sh
+# Run the checkdate script silently
+./scripts/checkdate.sh > /dev/null
 
-# Capture the result
+# Check if the "Last Updated" date is current
 if ! ./scripts/checkdate.sh | grep -q "already current"; then
     echo "❌ Push aborted: 'Last Updated' date is not current."
-    echo "➡️  Please run ./scripts/changedate.sh to update it."
+    echo "➡️  Please run ./dev changedate"
     exit 1
 fi
 
-# If date is current, allow push
+# Compare index.html and 404.html in the last commit (HEAD)
+if ! git diff --quiet HEAD:index.html HEAD:404.html; then
+    echo "❌ Push aborted: index.html and 404.html differ in the last commit."
+    echo "➡️  Please run ./dev 404 and ammend the commit"
+    exit 1
+fi
+
+echo "✅ Pre-push checks passed."
 exit 0
