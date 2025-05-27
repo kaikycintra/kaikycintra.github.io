@@ -69,22 +69,49 @@
         background-color: var(--bs-body-bg);
       }
 
-      main {
-        padding: 20px;
+      #page-content, footer {
         max-width: 992px;
+        padding: 0px 20px;
+        margin: 0 auto;
+      }
+
+      #page-content {
+        margin-top: 20px;
+      }
+
+      #navbar-content {
+        padding: 10px 15px;
+      }
+
+      main {
         width: 100%;
+        padding: 15px 15px 25px 15px;
         display: flex;
         flex-direction: column;
+        margin-top: 15px;
+      }
+
+      main, #navbar-content {
         background-color: var(--bs-body-bg);
+        border: 1px solid var(--bs-body-bg-ops);
+      }
+
+      #nav-button {
+        padding: 0px;
+      }
+
+      @media (min-width: 992px) {
+        body {
+          overflow-y: scroll;
+        }
       }
 
       a:hover {
         cursor: pointer;
       }
 
-      #navbar-content {
-        max-width: 992px;
-        padding: 0px 20px 0px 20px;
+      p {
+        margin-bottom: 0.25rem;;
       }
 
       @keyframes fade-in {
@@ -123,7 +150,7 @@
       }
       
       .card:hover, .card:active {
-        scale: 1.03;
+        scale: 1.01;
         box-shadow: 0 8px 12px 0 rgba(99, 100, 105, 0.37);
         cursor: pointer;
       }
@@ -166,8 +193,8 @@
       }
     </style>
     <body hx-ext="preload">
+        <!-- P5 canvas -->
         <div id="canvas-container">
-
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
           <symbol id="bootstrap" viewBox="0 0 118 94">
@@ -188,102 +215,104 @@
           </symbol>
         </svg>
         
-        <nav class="navbar navbar-expand-md w-100">
-          <div class="container-fluid" id="navbar-content">
-            <div class="d-flex">
-              <a class="navbar-brand fs-5"
-                  hx-get="pages/home.html"
-                  hx-target="next main"
-                  hx-swap="outerHTML transition:true">
-                  <em>Kaiky C.</em>
-              </a>
-              <div class="d-flex align-items-center dropdown color-modes">
-                <button class="btn border-0 px-0 text-decoration-none dropdown-toggle d-flex align-items-center"
-                        id="bd-theme"
-                        type="button"
-                        aria-expanded="false"
-                        data-bs-toggle="dropdown"
-                        data-bs-display="static">
-                  <svg class="bi my-1 me-2 theme-icon-active"><use href="#circle-half"></use></svg>
-                  <span class="fs-5" id="bd-theme-text"></span>
-                </button>
-                <ul class="dropdown-menu p-1" aria-labelledby="bd-theme" style="--bs-dropdown-min-width: 8rem;">
-                  <li>
-                    <button type="button" class="dropdown-item d-flex align-items-center rounded" data-bs-theme-value="light">
-                      <svg class="bi me-2 opacity-50 theme-icon"><use href="#sun-fill"></use></svg>
-                      Claro
-                      <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
-                    </button>
+        <div id="page-content" class="w-100">
+          <nav class="navbar navbar-expand-md w-100 py-0">
+            <div class="container-fluid" id="navbar-content">
+              <div class="d-flex">
+                <a class="navbar-brand fs-5"
+                    hx-get="pages/home.html"
+                    hx-target="next main"
+                    hx-swap="outerHTML transition:true">
+                    <em>Kaiky C.</em>
+                </a>
+                <div class="d-flex align-items-center dropdown color-modes">
+                  <button class="btn border-0 px-0 text-decoration-none dropdown-toggle d-flex align-items-center"
+                          id="bd-theme"
+                          type="button"
+                          aria-expanded="false"
+                          data-bs-toggle="dropdown"
+                          data-bs-display="static">
+                    <svg class="bi my-1 me-2 theme-icon-active"><use href="#circle-half"></use></svg>
+                    <span class="fs-5" id="bd-theme-text"></span>
+                  </button>
+                  <ul class="dropdown-menu p-1" aria-labelledby="bd-theme" style="--bs-dropdown-min-width: 8rem;">
+                    <li>
+                      <button type="button" class="dropdown-item d-flex align-items-center rounded" data-bs-theme-value="light">
+                        <svg class="bi me-2 opacity-50 theme-icon"><use href="#sun-fill"></use></svg>
+                        Claro
+                        <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" class="dropdown-item d-flex align-items-center rounded" data-bs-theme-value="dark">
+                        <svg class="bi me-2 opacity-50 theme-icon"><use href="#moon-stars-fill"></use></svg>
+                        Escuro
+                        <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
+                      </button>
+                    </li>
+                    <li>
+                      <button type="button" class="dropdown-item d-flex align-items-center active rounded" data-bs-theme-value="auto">
+                        <svg class="bi me-2 opacity-50 theme-icon"><use href="#circle-half"></use></svg>
+                        Auto
+                        <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <button id="nav-button" class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-nav-dropdown"
+              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="toggler-icon top-bar"></span>
+                <span class="toggler-icon middle-bar"></span>
+                <span class="toggler-icon bottom-bar"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-md-end mt-3 mt-md-0" id="navbar-nav-dropdown">
+                <ul class="navbar-nav nav-underline">
+                  <li class="nav-item">
+                    <a class="nav-link fs-5"
+                       hx-get="pages/home.html"
+                       hx-target="next main"
+                       hx-swap="outerHTML transition:true">
+                       Início
+                    </a>
                   </li>
-                  <li>
-                    <button type="button" class="dropdown-item d-flex align-items-center rounded" data-bs-theme-value="dark">
-                      <svg class="bi me-2 opacity-50 theme-icon"><use href="#moon-stars-fill"></use></svg>
-                      Escuro
-                      <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
-                    </button>
+                  <li class="nav-item">
+                    <a class="nav-link fs-5"
+                       hx-get="pages/projetos.html"
+                       hx-target="next main"
+                       hx-swap="outerHTML transition:true">
+                       Projetos
+                    </a>
                   </li>
-                  <li>
-                    <button type="button" class="dropdown-item d-flex align-items-center active rounded" data-bs-theme-value="auto">
-                      <svg class="bi me-2 opacity-50 theme-icon"><use href="#circle-half"></use></svg>
-                      Auto
-                      <svg class="bi ms-auto d-none"><use href="#check2"></use></svg>
-                    </button>
+                  <li class="nav-item fs-5">
+                    <a class="nav-link"
+                       hx-get="pages/blog.html"
+                       hx-target="next main"
+                       hx-swap="outerHTML transition:true">
+                       Blog
+                    </a>
+                  </li>
+                  <li class="nav-item fs-5">
+                    <a class="nav-link disabled"
+                       target="_blank">
+                       CV
+                    </a>
                   </li>
                 </ul>
               </div>
             </div>
-            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-nav-dropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="toggler-icon top-bar"></span>
-              <span class="toggler-icon middle-bar"></span>
-              <span class="toggler-icon bottom-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-md-end mt-3 mt-md-0" id="navbar-nav-dropdown">
-              <ul class="navbar-nav nav-underline">
-                <li class="nav-item">
-                  <a class="nav-link fs-5"
-                     hx-get="pages/home.html"
-                     hx-target="next main"
-                     hx-swap="outerHTML transition:true">
-                     Início
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link fs-5"
-                     hx-get="pages/projetos.html"
-                     hx-target="next main"
-                     hx-swap="outerHTML transition:true">
-                     Projetos
-                  </a>
-                </li>
-                <li class="nav-item fs-5">
-                  <a class="nav-link"
-                     hx-get="pages/blog.html"
-                     hx-target="next main"
-                     hx-swap="outerHTML transition:true">
-                     Blog
-                  </a>
-                </li>
-                <li class="nav-item fs-5">
-                  <a class="nav-link disabled"
-                     target="_blank">
-                     CV
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+          </nav>
+  
+          <main class="main-transition">
+              <div hx-get="pages/home.html"
+                   hx-target="closest main"
+                   hx-swap="outerHTML transition:true"
+                   hx-trigger="load">
+              </div>
+          </main>
+        </div>
 
-        <main class="main-transition">
-            <div hx-get="pages/home.html"
-                 hx-target="closest main"
-                 hx-swap="outerHTML transition:true"
-                 hx-trigger="load">
-            </div>
-        </main>
-
-        <footer class="my-4 w-100" style="padding: 10px 20px; max-width: 992px;">
+        <footer class="my-4 w-100">
           <hr class="opacity-50 my-1">
           <p class="fs-6 text-center text-body-secondary mb-0">© 2025 Kaiky Cintra. Last Updated: Unknown</p>
         </footer>
