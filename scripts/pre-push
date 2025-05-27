@@ -13,7 +13,7 @@ fi
 # Compare index.html and 404.html in the last commit (HEAD)
 if ! git diff --quiet HEAD:index.html HEAD:404.html; then
     echo "❌ Push aborted: index.html and 404.html differ in the last commit."
-    echo "➡️  Please run ./dev 404 and ammend the commit"
+    echo "➡️  Please run ./dev 404 and amend the commit"
     exit 1
 fi
 
