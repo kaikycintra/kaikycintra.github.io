@@ -1,6 +1,7 @@
 let attractors = [];
 const attractorScale = 20;
 let themeBgColor;
+let themeStrokeColor;
 
 // Current camera angles
 let camAngleX = 0, camAngleY = 0, camAngleZ = 0;
@@ -14,10 +15,17 @@ function updateThemeCanvasColor() {
   themeBgColor = bgColorString ? color(bgColorString) : color(0);
 }
 
+function updateThemeStrokeColor() {
+  const strokeColorString = getComputedStyle(document.body).getPropertyValue('--bs-body-bg-ops').trim();
+  console.log(strokeColorString)
+  themeStrokeColor = strokeColorString ? color(strokeColorString) : color(255); // Fallback to white
+}
+
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight, WEBGL);
   canvas.parent('canvas-container');
   updateThemeCanvasColor(); // Initial theme color
+  updateThemeStrokeColor(); // Initial theme stroke color
 
   // Generate multiple attractors
   let xyz = [9.081440237872517, -3.9368300928020394, 4.7516060384656775];
@@ -33,6 +41,7 @@ function setup() {
     for (const mutation of mutationsList) {
       if (mutation.type === 'attributes' && mutation.attributeName === 'data-bs-theme') {
         updateThemeCanvasColor(); // Update color when theme changes
+        updateThemeStrokeColor(); // Update stroke color when theme changes
         loop(); // Ensure the draw loop runs to apply the new background
       }
     }
@@ -43,11 +52,7 @@ function setup() {
 }
 
 function draw() {
-  if (themeBgColor) {
-    background(themeBgColor);
-  } else {
-    background(0);
-  }
+  background(themeBgColor);
 
   // Interpolate camera angles toward target
   camAngleX = lerp(camAngleX, targetCamAngleX, angleLerpSpeed);
@@ -59,7 +64,7 @@ function draw() {
   rotateZ(camAngleZ);
 
   noFill();
-  stroke(255);
+  stroke(themeStrokeColor);
   for (let points of attractors) {
     beginShape();
     for (let v of points) {
