@@ -101,9 +101,3 @@ function generateLorenzAttractor(x, y, z) {
 function isCloseEnough(a, b) {
   return abs(a - b) < 0.1;
 }
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-  updateThemeCanvasColor(); // Also update color on resize, in case of dynamic changes
-  loop(); // Ensure redraw if it was stopped
-}
