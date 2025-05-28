@@ -1,89 +1,109 @@
-let points = [];
-let x = 0.01;
-let y = 0;
-let z = 0;
-
-let a = 10;
-let b = 28;
-let c = 8.0 / 3.0;
-let attractorScale = 12; // Increased scale factor for the drawing
-
+let attractors = [];
+const attractorScale = 20;
 let themeBgColor;
-const trailAlpha = 20; // Opacity for the fading trails
+
+// Current camera angles
+let camAngleX = 0, camAngleY = 0, camAngleZ = 0;
+// Target camera angles
+let targetCamAngleX = 0, targetCamAngleY = 0, targetCamAngleZ = 0;
+// Speed of interpolation
+let angleLerpSpeed = 0.1;
 
 function updateThemeCanvasColor() {
-  // Get the computed background color string from the CSS variable
-  const bodyStyle = getComputedStyle(document.body);
-  const bgColorString = bodyStyle.getPropertyValue('--bs-body-bg').trim();
-
-  if (bgColorString) {
-    themeBgColor = color(bgColorString); // p5.js color object
-  } else {
-    themeBgColor = color(0); // Fallback to black if CSS variable is not found
-    console.warn("Could not determine theme background color. Falling back to black.");
-  }
+  const bgColorString = getComputedStyle(document.body).getPropertyValue('--bs-body-bg').trim();
+  themeBgColor = bgColorString ? color(bgColorString) : color(0);
 }
 
 function setup() {
-  // These variables were declared but not used.
-  // mainWidth = document.querySelector('main').offsetWidth
-  // sideWidth = (windowWidth - mainWidth) / 2
   let canvas = createCanvas(windowWidth, windowHeight, WEBGL);
-  canvas.parent('canvas-container')
-  
-  updateThemeCanvasColor(); // Get initial theme color
-  background(themeBgColor);   // Set initial background to the theme color
+  canvas.parent('canvas-container');
+  updateThemeCanvasColor(); // Initial theme color
+
+  // Generate multiple attractors
+  let xyz = [9.081440237872517, -3.9368300928020394, 4.7516060384656775];
+  attractors.push(generateLorenzAttractor(xyz[0], xyz[1], xyz[2]));
+
+  // Initialize current and target camera angles to the same random values
+  camAngleX = targetCamAngleX = random(TWO_PI);
+  camAngleY = targetCamAngleY = random(TWO_PI);
+  camAngleZ = targetCamAngleZ = random(TWO_PI);
 
   // Observe changes to the data-bs-theme attribute on the html element
   const observer = new MutationObserver((mutationsList) => {
     for (const mutation of mutationsList) {
       if (mutation.type === 'attributes' && mutation.attributeName === 'data-bs-theme') {
         updateThemeCanvasColor(); // Update color when theme changes
-        // For an immediate change of the solid background on theme switch:
-        // background(themeBgColor); // Uncomment if you want the whole canvas to refresh color instantly
+        loop(); // Ensure the draw loop runs to apply the new background
       }
     }
   });
   observer.observe(document.documentElement, { attributes: true });
+
+  loop(); // Start continuous drawing for interpolation and initial render
 }
 
 function draw() {
-  // Use the theme color for the fading trails
   if (themeBgColor) {
-    background(themeBgColor.levels[0], themeBgColor.levels[1], themeBgColor.levels[2], trailAlpha);
+    background(themeBgColor);
   } else {
-    background(0, trailAlpha); // Fallback if themeBgColor isn't set
+    background(0);
   }
 
-  rotateX(PI / 6);   // fixed camera angle
-  rotateZ(frameCount * 0.002); // slow rotation for effect
+  // Interpolate camera angles toward target
+  camAngleX = lerp(camAngleX, targetCamAngleX, angleLerpSpeed);
+  camAngleY = lerp(camAngleY, targetCamAngleY, angleLerpSpeed);
+  camAngleZ = lerp(camAngleZ, targetCamAngleZ, angleLerpSpeed);
 
-  let dt = 0.01;
-  let dx = a * (y - x) * dt;
-  let dy = (x * (b - z) - y) * dt;
-  let dz = (x * y - c * z) * dt;
-
-  x += dx;
-  y += dy;
-  z += dz;
-
-  points.push(createVector(x, y, z));
-  if (points.length > 2000) {
-    points.shift();
-  }
+  rotateX(camAngleX);
+  rotateY(camAngleY);
+  rotateZ(camAngleZ);
 
   noFill();
   stroke(255);
-  beginShape();
-  for (let v of points) {
-    vertex(v.x * attractorScale, v.y * attractorScale, v.z * attractorScale);
+  for (let points of attractors) {
+    beginShape();
+    for (let v of points) {
+      vertex(v.x * attractorScale, v.y * attractorScale, v.z * attractorScale);
+    }
+    endShape();
   }
-  endShape();
+
+  // Stop the loop if camera is close enough to target
+  if (
+    isCloseEnough(camAngleX, targetCamAngleX) &&
+    isCloseEnough(camAngleY, targetCamAngleY) &&
+    isCloseEnough(camAngleZ, targetCamAngleZ)
+  ) {
+    noLoop();
+  }
+}
+
+function generateLorenzAttractor(x, y, z) {
+  let a = 10, b = 28, c = 8.0 / 3.0;
+  let dt = 0.02;
+  let points = [];
+
+  for (let i = 0; i < 1000; i++) {
+    let dx = a * (y - x) * dt;
+    let dy = (x * (b - z) - y) * dt;
+    let dz = (x * y - c * z) * dt;
+
+    x += dx;
+    y += dy;
+    z += dz;
+
+    points.push(createVector(x, y, z));
+  }
+
+  return points;
+}
+
+function isCloseEnough(a, b) {
+  return abs(a - b) < 0.1;
 }
 
 function windowResized() {
-  // It's good practice to also update the color reference if a resize might imply a re-init
-  // updateThemeCanvasColor(); // Potentially update if needed, though observer should handle theme changes
   resizeCanvas(windowWidth, windowHeight);
-  background(themeBgColor); // Re-apply solid background on resize with current theme color
+  updateThemeCanvasColor(); // Also update color on resize, in case of dynamic changes
+  loop(); // Ensure redraw if it was stopped
 }

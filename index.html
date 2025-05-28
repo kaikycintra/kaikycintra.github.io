@@ -58,6 +58,7 @@
       #canvas-container {
         position: fixed;
         top: 0; left: 0;
+        z-index: -1;
       }
 
       body {
@@ -222,6 +223,7 @@
                 <a class="navbar-brand fs-5"
                     hx-get="pages/home.html"
                     hx-target="next main"
+                    hx-push-url="inicio"
                     hx-swap="outerHTML transition:true">
                     <em>Kaiky C.</em>
                 </a>
@@ -313,9 +315,12 @@
           </main>
         </div>
 
-        <footer class="my-4 w-100">
+        <footer class="mt-4 mb-2 w-100">
           <hr class="opacity-50 my-1">
-          <p class="fs-6 text-center text-body-secondary mb-0">© 2025 Kaiky Cintra. Last Updated: 2025-05-27</p>
+          <div class="row row-cols-1 row-cols-sm-2 g-1">
+            <span class="fs-6 text-center text-sm-end text-body-secondary mb-0">© 2025 Kaiky Cintra.</span>
+            <span class="fs-6 text-center text-sm-start text-body-secondary mb-0"> Last Updated: 2025-05-27</span>
+          </div>
         </footer>
 
         <!-- Bootstrap -->
@@ -356,6 +361,16 @@
                   }
                 }
               });
+            });
+
+            document.body.addEventListener('htmx:pushedIntoHistory', () => {
+              const delta = 1; // max radians to change per axis
+
+              targetCamAngleX = camAngleX + random(-delta, delta);
+              targetCamAngleY = camAngleY + random(-delta, delta);
+              targetCamAngleZ = camAngleZ + random(-delta, delta);
+
+              loop(); // Resume animation to allow smooth transition
             });
           });
         </script>
