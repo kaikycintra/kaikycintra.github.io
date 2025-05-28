@@ -86,7 +86,7 @@
 
       main {
         width: 100%;
-        padding: 15px 15px 25px 15px;
+        padding: 15px 15px 15px 15px;
         display: flex;
         flex-direction: column;
         margin-top: 15px;
@@ -153,21 +153,22 @@
         box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.37);
         transition: scale 0.3s ease, box-shadow 0.3s ease;
       }
-      
+
       .card:hover, .card:active {
         scale: 1.01;
         box-shadow: 0 8px 12px 0 rgba(99, 100, 105, 0.37);
         cursor: pointer;
       }
 
+      .card.no-hover:hover, .card.no-hover:active {
+        scale: 1;
+        box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.37);
+        cursor: default;
+      }
+
       .card-img-top {
         height: 150px;
         object-fit: cover;
-      }
-
-      
-      [data-bs-theme=light] .card {
-        box-shadow: 0 8px 12px 0 rgba(99, 100, 105, 0.37);
       }
 
       [data-bs-theme=light] .card:hover, .card:active {
@@ -211,6 +212,57 @@
       #page-loader.htmx-request .dot3 {
         animation: blink 1.4s infinite both;
         animation-delay: 0.4s;
+      }
+
+      /* masonry CSS */
+      .masonry {
+        --gutter: 0.25em;
+        --flow-space: var(--gutter);
+        --switcher-target-container-width: 25rem;
+      }
+
+      .flow > * + * {
+        margin-block-start: var(--flow-space, 1em);
+      }
+
+      .wrapper {
+        margin-inline: auto;
+        padding-inline: var(--gutter);
+      }
+
+      .switcher {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--gutter, 1em);
+        align-items: var(--switcher-vertical-alignment, flex-start);
+      }
+
+      .switcher > * {
+        flex-grow: 1;
+        flex-basis: calc(
+          (var(--switcher-target-container-width, 30rem) - 100%) * 999
+        );
+      }
+
+      /* masonry number of columns */
+      .column-layout > * {
+        flex-basis: 100%;
+      }
+
+      @media (min-width: 576px) {
+        .column-layout > * {
+          flex-basis: calc(50% - (1em / 2));
+        }
+      }
+
+      @media (min-width: 992px) {
+        .column-layout > * {
+          flex-basis: calc(33.3333% - (1em * 2 / 3));
+        }
+      }
+
+      .blockquote-footer {
+        margin-bottom: 0px;
       }
     </style>
     <body hx-ext="preload">
@@ -318,6 +370,15 @@
                     </a>
                   </li>
                   <li class="nav-item fs-5">
+                    <a class="nav-link"
+                       hx-get="pages/reviews.html"
+                       hx-target="next main"
+                       hx-push-url="reviews"
+                       hx-swap="outerHTML transition:true">
+                       Reviews
+                    </a>
+                  </li>
+                  <li class="nav-item fs-5">
                     <a class="nav-link disabled"
                        target="_blank">
                        CV
@@ -367,6 +428,8 @@
                 pageToLoad = 'pages/blog.html';
             } else if (path.endsWith('/inicio') || path.endsWith('/inicio/')) {
                 pageToLoad = 'pages/home.html';
+            } else if (path.endsWith('/reviews') || path.endsWith('/reviews/')) {
+                pageToLoad = 'pages/reviews.html';
             } 
 
             mainElement.setAttribute('hx-get', pageToLoad);
