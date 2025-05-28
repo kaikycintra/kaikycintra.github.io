@@ -107,6 +107,10 @@
         }
       }
 
+      a {
+        color: var(--bs-body-bg-ops)
+      }
+
       a:hover {
         cursor: pointer;
       }
@@ -188,9 +192,25 @@
       [data-bs-theme="dark"] .theme-icon-active {
         fill: var(--light-bg);
       }
+      
+      @keyframes blink {
+        0%, 100% { opacity: .2; }
+        50% { opacity: 1; }
+      }
 
-      a {
-        color: var(--bs-body-bg-ops)
+      #page-loader.htmx-request .dot1 {
+        animation: blink 1.4s infinite both;
+        animation-delay: 0.0s;
+      }
+
+      #page-loader.htmx-request .dot2 {
+        animation: blink 1.4s infinite both;
+        animation-delay: 0.2s;
+      }
+
+      #page-loader.htmx-request .dot3 {
+        animation: blink 1.4s infinite both;
+        animation-delay: 0.4s;
       }
     </style>
     <body hx-ext="preload">
@@ -311,8 +331,13 @@
           <main class="main-transition"
                 id="dynamic-main-content"
                 hx-swap="outerHTML transition:true"
-                hx-trigger="load"> <!-- hx-get will be set by JavaScript -->
+                hx-trigger="load"
+                hx-indicator="#page-loader"> <!-- hx-get will be set by JavaScript -->
+                <div id="page-loader" class="htmx-indicator fs-2 text-center p-2">
+                  Carregando Página<span class="dot1">.</span><span class="dot2">.</span><span class="dot3">.</span>
+                </div>
           </main>
+
         </div>
 
         <footer class="mt-4 mb-2 w-100">
