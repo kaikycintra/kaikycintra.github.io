@@ -1,19 +1,27 @@
 #!/bin/bash
 
+# Check if the installed hook is the same as the one in the scripts directory
+if ! diff -q "scripts/pre-push" ".git/hooks/pre-push"; then
+    echo "❌ Push aborted: The Git pre-push hook is outdated or has been modified locally."
+    echo "   The installed hook (.git/hooks/pre-push) differs from the source (scripts/pre-push)."
+    echo "➡️  Please run ./dev setup to update the hook."
+    exit 1
+fi
+
 # Run the checkdate script silently
 ./scripts/checkdate.sh > /dev/null
 
 # Check if the "Last Updated" date is current
 if ! ./scripts/checkdate.sh | grep -q "already current"; then
     echo "❌ Push aborted: 'Last Updated' date is not current."
-    echo "➡️  Please run ./dev changedate"
+    echo "➡️  Please run ./dev changedate and ./dev 404"
     exit 1
 fi
 
 # Compare index.html and 404.html in the last commit (HEAD)
 if ! git diff --quiet HEAD:index.html HEAD:404.html; then
     echo "❌ Push aborted: index.html and 404.html differ in the last commit."
-    echo "➡️  Please run ./dev 404 and amend the commit"
+    echo "➡️  Please run ./dev 404"
     exit 1
 fi
 
