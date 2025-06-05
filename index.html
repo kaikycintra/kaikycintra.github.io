@@ -38,6 +38,14 @@
         --dark-bg: rgb(20, 20, 20);
       }
 
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      ::-webkit-scrollbar-button {
+        display: none;
+      }
+
       [data-bs-theme=light] {
         --bs-body-bg: var(--light-bg);
         --bs-body-bg-ops: var(--dark-bg);
@@ -68,6 +76,8 @@
         justify-content: space-between;
         align-items: center;
         background-color: var(--bs-body-bg);
+        overflow-y: scroll;
+        -ms-overflow-style:none;
       }
 
       #page-content, footer {
@@ -99,12 +109,6 @@
 
       #nav-button {
         padding: 0px;
-      }
-
-      @media (min-width: 992px) {
-        body {
-          overflow-y: scroll;
-        }
       }
 
       a {
@@ -261,7 +265,7 @@
         margin-bottom: 0px;
       }
     </style>
-    <body hx-ext="preload">
+    <body hx-ext="preload" class="invisible-scroll">
         <!-- P5 canvas -->
         <div id="canvas-container">
         </div>
@@ -401,7 +405,7 @@
           <hr class="opacity-50 my-1">
           <div class="row row-cols-1 row-cols-sm-2 g-1">
             <span class="fs-6 text-center text-sm-end text-body-secondary mb-0">© 2025 Kaiky Cintra.</span>
-            <span class="fs-6 text-center text-sm-start text-body-secondary mb-0"> Last Updated: 2025-05-29</span>
+            <span class="fs-6 text-center text-sm-start text-body-secondary mb-0"> Last Updated: 2025-06-04</span>
           </div>
         </footer>
 
