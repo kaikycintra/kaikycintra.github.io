@@ -1,4 +1,28 @@
 <main class="main-transition" style="padding-bottom: 25px;">
+    <script>
+        if (Boolean(window.localStorage.getItem('secret'))) {
+          cardsdiv = document.querySelector('main div')
+          secretcard = document.createElement('div')
+          secretcard.classList.add('col')
+          secretcard.innerHTML = `
+          <div class="card h-100"
+              hx-get="pages/blogs/secret.html"
+              hx-target="closest main"
+              hx-swap="outerHTML transition:true show:window:top">
+            <img src="static/black.png" class="card-img-top" alt="homem e ">
+            <div class="card-body">
+              <h3 class="card-title">Coldplay vs Queen</h3>
+              <p class="card-text fs-6">Entrada secreta do blog.</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-body-secondary">15 de julho, 2025</small>
+            </div>
+          </div>
+          `
+         cardsdiv.appendChild(secretcard)
+         window.localStorage.removeItem('secret')
+        }
+    </script>
     <p class="fs-1"> Blog</p>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
       <div class="col">
