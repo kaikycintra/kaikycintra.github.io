@@ -425,17 +425,17 @@
 
             let pageToLoad = 'pages/home.html'; 
             if (path.endsWith('/projetos') || path.endsWith('/projetos/')) {
-                pageToLoad = 'pages/projetos.html';
+                pageToLoad = '/pages/projetos.html';
             } else if (path.endsWith('/blog') || path.endsWith('/blog/')) {
-                pageToLoad = 'pages/blog.html';
+                pageToLoad = '/pages/blog.html';
             } else if (path.endsWith('/blog/mac0214') || path.endsWith('/blog/mac0214/')) {
-                pageToLoad = 'pages/blogs/mac0214.html';
+                pageToLoad = '/pages/blogs/mac0214.html';
             } else if (path.endsWith('/blog/mac0215') || path.endsWith('/blog/mac0215/')) {
-                pageToLoad = 'pages/blogs/mac0215.html';
+                pageToLoad = '/pages/blogs/mac0215.html';
             } else if (path.endsWith('/inicio') || path.endsWith('/inicio/')) {
-                pageToLoad = 'pages/home.html';
+                pageToLoad = '/pages/home.html';
             } else if (path.endsWith('/reviews') || path.endsWith('/reviews/')) {
-                pageToLoad = 'pages/reviews.html';
+                pageToLoad = '/pages/reviews.html';
             } 
 
             mainElement.setAttribute('hx-get', pageToLoad);
