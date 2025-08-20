@@ -14,12 +14,12 @@
         <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
 
         <!-- Favicon -->
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
-        <link rel="shortcut icon" href="favicon_io/favicon.ico">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+        <link rel="shortcut icon" href="/favicon_io/favicon.ico">
         
         <!-- Navbar CSS -->
-        <link rel="stylesheet" href="static/nav-toggler.css">
+        <link rel="stylesheet" href="/static/nav-toggler.css">
 
         <!-- HTMX -->
         <script src="https://unpkg.com/htmx.org@2.0.4" crossorigin="anonymous"></script>
@@ -27,7 +27,7 @@
         
         <!-- P5.js -->
         <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
-        <script src="static/sketch.js"></script>
+        <script src="/static/sketch.js"></script>
         
         <!-- Google Verification -->
         <meta name="google-site-verification" content="rSx-Kt8Lj0n2wg_ScNa9d11AsHKRHB1VQYwQDL_X3Nw" />
@@ -294,7 +294,7 @@
             <div class="container-fluid" id="navbar-content">
               <div class="d-flex">
                 <a class="navbar-brand fs-5"
-                    hx-get="pages/home.html"
+                    hx-get="/pages/home.html"
                     hx-target="next main"
                     hx-push-url="inicio"
                     hx-swap="outerHTML transition:true">
@@ -345,7 +345,7 @@
                 <ul class="navbar-nav nav-underline mt-2">
                   <li class="nav-item">
                     <a class="nav-link fs-5"
-                       hx-get="pages/home.html"
+                       hx-get="/pages/home.html"
                        hx-target="next main"
                        hx-push-url="inicio"
                        hx-swap="outerHTML transition:true">
@@ -354,7 +354,7 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link fs-5"
-                       hx-get="pages/projetos.html"
+                       hx-get="/pages/projetos.html"
                        hx-target="next main"
                        hx-push-url="projetos"
                        hx-swap="outerHTML transition:true">
@@ -363,7 +363,7 @@
                   </li>
                   <li class="nav-item fs-5">
                     <a class="nav-link"
-                       hx-get="pages/blog.html"
+                       hx-get="/pages/blog.html"
                        hx-target="next main"
                        hx-push-url="blog"
                        hx-swap="outerHTML transition:true">
@@ -372,7 +372,7 @@
                   </li>
                   <li class="nav-item fs-5">
                     <a class="nav-link"
-                       hx-get="pages/reviews.html"
+                       hx-get="/pages/reviews.html"
                        hx-target="next main"
                        hx-push-url="reviews"
                        hx-swap="outerHTML transition:true">
@@ -381,7 +381,7 @@
                   </li>
                   <li class="nav-item fs-5">
                     <a class="nav-link"
-                      href="static/cv.pdf"
+                      href="/static/cv.pdf"
                       target="_blank">
                       CV
                     </a>
@@ -416,7 +416,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous">
         </script>
-        <script src="static/bstheme.js"></script>
+        <script src="/static/bstheme.js"></script>
         <script>
           document.addEventListener('DOMContentLoaded', function () {
             // Client side routing

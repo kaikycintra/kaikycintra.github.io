@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-md w-100">
         <div class="container-fluid" id="navbar-content">
         <a class="navbar-brand fs-5"
-            hx-get="pages/home.html"
+            hx-get="/pages/home.html"
             hx-target="next main"
             hx-swap="outerHTML">
             Kaiky C.
@@ -17,7 +17,7 @@
             <ul class="navbar-nav nav-underline">
             <li class="nav-item">
                 <a class="nav-link fs-5"
-                    hx-get="pages/home.html"
+                    hx-get="/pages/home.html"
                     hx-target="next main"
                     hx-swap="outerHTML">
                     Início
@@ -25,7 +25,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link fs-5"
-                    hx-get="pages/projetos.html"
+                    hx-get="/pages/projetos.html"
                     hx-target="next main"
                     hx-swap="outerHTML">
                     Projetos
@@ -33,7 +33,7 @@
             </li>
             <li class="nav-item fs-5">
                 <a class="nav-link"
-                    hx-get="pages/blog.html"
+                    hx-get="/pages/blog.html"
                     hx-target="next main"
                     hx-swap="outerHTML">
                     Blog
@@ -41,7 +41,7 @@
             </li>
             <li class="nav-item fs-5">
                 <a class="nav-link"
-                   hx-get="pages/reviews.html"
+                   hx-get="/pages/reviews.html"
                    hx-target="next main"
                    hx-push-url="reviews"
                    hx-swap="outerHTML transition:true">
@@ -50,7 +50,7 @@
             </li>
             <li class="nav-item fs-5">
                 <a class="nav-link"
-                   hx-get="pages/blogs/secret.html"
+                   hx-get="/pages/blogs/secret.html"
                    hx-target="main"
                    hx-push-url="secret"
                    hx-swap="outerHTML transition:true">
@@ -63,7 +63,7 @@
     </nav>
 
     <main>
-        <div hx-get="pages/home.html"
+        <div hx-get="/pages/home.html"
                 hx-target="closest main"
                 hx-swap="outerHTML"
                 hx-trigger="load">
