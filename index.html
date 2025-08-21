@@ -421,7 +421,11 @@
           document.addEventListener('DOMContentLoaded', function () {
             // Client side routing
             const mainElement = document.getElementById('dynamic-main-content');
-            const path = window.location.pathname;
+            let path = window.location.pathname;
+            
+            if (path !== '/' && path.endsWith('/')) {
+                path = path.slice(0, -1);
+            }
 
             let pageToLoad = 'pages/home.html'; 
             if (path.endsWith('/projetos') || path.endsWith('/projetos/')) {
@@ -440,7 +444,7 @@
 
             mainElement.setAttribute('hx-get', pageToLoad);
             htmx.process(mainElement);
-            htmx.trigger(mainElement, "load")
+            htmx.trigger(mainElement, "load");
 
             // Navbar collapse logic
             const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
