@@ -427,7 +427,9 @@
                 path = path.slice(0, -1);
             }
 
-            let pageToLoad = 'pages/home.html'; 
+            const homePage = 'pages/home.html';
+            let pageToLoad = homePage
+
             if (path.endsWith('/projetos') || path.endsWith('/projetos/')) {
                 pageToLoad = '/pages/projetos.html';
             } else if (path.endsWith('/blog') || path.endsWith('/blog/')) {
@@ -441,6 +443,10 @@
             } else if (path.endsWith('/reviews') || path.endsWith('/reviews/')) {
                 pageToLoad = '/pages/reviews.html';
             } 
+
+            if (pageToLoad == homePage) {
+              window.location.pathname = "/inicio"
+            }
 
             mainElement.setAttribute('hx-get', pageToLoad);
             htmx.process(mainElement);
