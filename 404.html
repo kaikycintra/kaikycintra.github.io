@@ -130,6 +130,19 @@
         cursor: pointer;
       }
 
+      .titulinha {
+            display: flex;
+            align-items: center;
+      }
+      
+      .titulinha::after {
+            content: '';
+            flex: 1;
+            margin-left: 1rem;
+            height: 1px;
+            background-color: var(--bs-body-color);
+        }
+
       @keyframes fade-in {
         from { opacity: 0; }
       }
