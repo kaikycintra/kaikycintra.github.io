@@ -1,6 +1,6 @@
 <div>
     <div class="wrapper switcher column-layout">
-        <div class="flow">
+        <div class="flow" id="flow1">
             <div class="card mb-4 no-hover">
                 <div class="card-body d-flex flex-column">
                 <blockquote class="blockquote mb-0 flex-grow-1">
@@ -15,35 +15,48 @@
                 target="_blank"
                 class="text-decoration-none">
                 <div class="card mb-4">
-                <div class="card-body d-flex flex-column">
-                    <blockquote class="blockquote mb-0 flex-grow-1">
-                    <p>"Awesome really helpful very compassionate also does not have a problem helping people!!!!!!!!!!!!"</p>
-                    </blockquote>
-                    <figcaption class="blockquote-footer mt-3 fs-5">
-                    Aluno animado da Schoolhouse
-                    </figcaption>
-                </div>
+                    <div class="card-body d-flex flex-column">
+                        <blockquote class="blockquote mb-0 flex-grow-1">
+                        <p>"Awesome really helpful very compassionate also does not have a problem helping people!!!!!!!!!!!!"</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer mt-3 fs-5">
+                        Aluno animado da Schoolhouse
+                        </figcaption>
+                    </div>
                 </div>
             </a>
+            <div hx-get="/partials/reviewsblock.html"
+                hx-target="closest div .flow"
+                hx-swap="beforeend"
+                hx-select="#flow2"
+                hx-trigger="intersect">
+            </div>
         </div>
 
-        <div class="flow">
+        <div class="flow" id="flow2">
             <a href="https://schoolhouse.world/u/51559/feedback"
                 target="_blank"
                 class="text-decoration-none">
                 <div class="card mb-4">
-                <div class="card-body d-flex flex-column">
-                    <blockquote class="blockquote mb-0 flex-grow-1">
-                    <p>"Kaiky was awesome he was very welcoming and didn't make me feel nervous when I got a problem wrong. He also made sure I understood the problem and showed me different techniques to learn and understand the problem better"</p>
-                    </blockquote>
-                    <figcaption class="blockquote-footer mt-3 fs-5">
-                    Aluno da Schoolhouse
-                    </figcaption>
-                </div>
+                    <div class="card-body d-flex flex-column">
+                        <blockquote class="blockquote mb-0 flex-grow-1">
+                        <p>"Kaiky was awesome he was very welcoming and didn't make me feel nervous when I got a problem wrong. He also made sure I understood the problem and showed me different techniques to learn and understand the problem better"</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer mt-3 fs-5">
+                        Aluno da Schoolhouse
+                        </figcaption>
+                    </div>
                 </div>
             </a>
+            <div hx-get="/partials/reviewsblock.html"
+                hx-target="closest div .flow"
+                hx-swap="beforeend"
+                hx-select="#flow3"
+                hx-trigger="intersect">
+            </div>
         </div>
-        <div class="flow">
+
+        <div class="flow" id="flow3">
             <div class="card mb-4 no-hover">
                 <div class="card-body d-flex flex-column">
                 <blockquote class="blockquote mb-0 flex-grow-1">
@@ -64,11 +77,11 @@
                 </figcaption>
                 </div>
             </div>
+            <div hx-get="/partials/reviewsblock.html"
+                hx-target="closest div .flow"
+                hx-swap="beforeend"
+                hx-select="#flow1"
+                hx-trigger="intersect">
+            </div>
         </div>
-    </div>
-        <div hx-get="/partials/reviewsblock.html"
-         hx-swap="beforeend"
-         hx-target="closest main"
-         hx-trigger="intersect">
-    </div>
 </div>
