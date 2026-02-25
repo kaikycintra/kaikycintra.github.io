@@ -1,8 +1,9 @@
 <main class="main-transition" style="padding-bottom: 25px;">
     <script>
+      {
         if (Boolean(window.localStorage.getItem('secret'))) {
-          cardsdiv = document.querySelector('main div')
-          secretcard = document.createElement('div')
+          let cardsdiv = document.querySelector('main div')
+          let secretcard = document.createElement('div')
           secretcard.classList.add('col')
           secretcard.innerHTML = `
           <div class="card h-100"
@@ -22,6 +23,7 @@
          cardsdiv.appendChild(secretcard)
          window.localStorage.removeItem('secret')
         }
+      }
     </script>
     <p class="fs-1"> Blog</p>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
