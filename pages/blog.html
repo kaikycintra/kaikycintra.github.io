@@ -23,16 +23,90 @@
          cardsdiv.appendChild(secretcard)
          window.localStorage.removeItem('secret')
         }
+
+        // global variables for page
+
+        let blogCards = document.getElementsByClassName('blog-post')
+        let categoriesDiv = document.getElementById('categories-div')
+        let blogsDiv = document.getElementById('blogs-div')
+        let buttonClasses = ['btn', 'btn-dark']
+
+        // initialize IDs
+        for(let i = 0; i < blogCards.length; i++) {
+          blogCards.id = `blogCard${i}`
+        }
+
+        // store blogCards as initial state, not HTMLCollection
+        blogCards = Array.from(document.getElementsByClassName('blog-post'))
+
+
+        function filterCategory(category) {
+          blogsDiv.innerHTML = ''
+
+          blogCards.forEach(blogCard => {
+            if (blogCard.dataset.category === category || category === "all") {
+              let wrapper = document.createElement('div');
+              wrapper.classList.add('col');
+              wrapper.appendChild(blogCard);
+              blogsDiv.appendChild(wrapper);
+            }
+          })
+        }
+
+        function styleButton(button) {
+          buttonClasses.forEach(buttonClass => {
+            button.classList.add(buttonClass)
+          })
+        }
+
+        function createUnfilterButton() {
+          let button = document.createElement('button')
+          button.innerText = 'Todos'
+          button.addEventListener('click', event => {
+            filterCategory('all')
+          })
+
+          return button
+        }
+
+        function setupCategoriesButtons() {
+          let categories = new Set()
+          blogCards.forEach(blogCard => {
+            let category = blogCard.dataset.category
+            categories.add(category)
+          });
+  
+          categories.forEach(category => {
+            let button = document.createElement('button')
+            button.innerText = category
+            button.addEventListener('click', event => {
+              filterCategory(category)
+            })
+  
+            styleButton(button)
+  
+            categoriesDiv.appendChild(button)
+          })
+  
+          let unfilterButton = createUnfilterButton()
+          styleButton(unfilterButton)
+          categoriesDiv.prepend(unfilterButton)
+        }
+
+        setupCategoriesButtons()  // run setup
       }
     </script>
     <p class="fs-1"> Blog</p>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+    <div id="categories-div" style="display: flex; width: 100%; overflow-x: scroll; margin-bottom: 1rem; gap: 1rem;">
+    </div>
+    <div id="blogs-div" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
       <div class="col">
-        <div class="card h-100"
+        <div class="card h-100 blog-post"
               hx-get="/pages/blogs/mac0102.html"
               hx-push-url="/blog/trilhas"
               hx-target="closest main"
-              hx-swap="outerHTML transition:true show:window:top">
+              hx-swap="outerHTML transition:true show:window:top"
+              data-category="USP">
           <img src="/static/ime.jpg" class="card-img-top" alt="tralalero tralala">
           <div class="card-body">
             <h3>Caminhos no BCC</h3>
@@ -44,11 +118,12 @@
         </div>
       </div>
       <div class="col">
-        <div class="card h-100"
+        <div class="card h-100 blog-post"
               hx-get="/pages/blogs/mac0215.html"
               hx-push-url="/blog/mac0215"
               hx-target="closest main"
-              hx-swap="outerHTML transition:true show:window:top">
+              hx-swap="outerHTML transition:true show:window:top"
+              data-category="USP">
           <img src="/static/mapametabolico.png" class="card-img-top" alt="homem e ">
           <div class="card-body">
             <h3 class="card-title">MAC0215</h3>
@@ -60,11 +135,12 @@
         </div>
       </div>
       <div class="col">
-        <div class="card h-100"
+        <div class="card h-100 blog-post"
               hx-get="/pages/blogs/mac0214.html"
               hx-push-url="/blog/mac0214"
               hx-target="closest main"
-              hx-swap="outerHTML transition:true show:window:top">
+              hx-swap="outerHTML transition:true show:window:top"
+              data-category="USP-2">
           <img src="/static/monkeyride.gif" class="card-img-top" alt="homem e ">
           <div class="card-body">
             <h3 class="card-title">MAC0214</h3>
