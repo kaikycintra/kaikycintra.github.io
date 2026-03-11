@@ -29,7 +29,7 @@
         let blogCards = document.getElementsByClassName('blog-post')
         let categoriesDiv = document.getElementById('categories-div')
         let blogsDiv = document.getElementById('blogs-div')
-        let buttonClasses = ['btn', 'btn-dark']
+        let buttonClasses = ['nav-link', 'fs-5']
 
         // initialize IDs
         for(let i = 0; i < blogCards.length; i++) {
@@ -77,15 +77,15 @@
           });
   
           categories.forEach(category => {
-            let button = document.createElement('button')
-            button.innerText = category
-            button.addEventListener('click', event => {
+            let anchor = document.createElement('a')
+            anchor.innerText = category
+            anchor.addEventListener('click', event => {
               filterCategory(category)
             })
   
-            styleButton(button)
+            styleButton(anchor)
   
-            categoriesDiv.appendChild(button)
+            categoriesDiv.appendChild(anchor)
           })
   
           let unfilterButton = createUnfilterButton()
@@ -97,7 +97,10 @@
       }
     </script>
     <p class="fs-1"> Blog</p>
-    <div id="categories-div" style="display: flex; width: 100%; overflow-x: scroll; margin-bottom: 1rem; gap: 1rem;">
+    <p class="fs-3">Categorias</p>
+    <div id="categories-div"
+         class="nav-underline"
+         style="display: flex; width: 100%; overflow-x: scroll; margin-bottom: 1rem; gap: 1rem;">
     </div>
     <div id="blogs-div" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
       <div class="col">
