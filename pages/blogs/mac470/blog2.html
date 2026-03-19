@@ -1,0 +1,38 @@
+<main class="main-transition fs-5">
+    <a hx-get="/pages/blog.html"
+       hx-push-url="/blog"
+       hx-target="closest main"
+       hx-swap="outerHTML transition:true show:window:top"
+       class="link-body-emphasis link-underline-opacity-75 link-underline-opacity-25-hover fs-3 mb-3">
+       Voltar
+    </a>
+    <p class="fs-1 fw-semibold mb-0">Tutorial 2 Flusp</p>
+    <p class="fs-5 fw-semibold text-muted">18 Março, 2026</p>
+    <hr class="opacity-50">
+    
+    <p class="fs-3 fw-semibold">Tutorial 2</p>
+    <p>
+        Não consegui rodar a VM e tive que voltar ao tutorial 1, ela aparecia como shut off e não iniciava.
+        <pre><code>
+            (LK-DEV) root@ubuntudokaiky:/home/lk_dev# virsh start arm64
+            > error: Failed to start domain 'arm64'
+            > error: operation failed: Unable to find a satisfying virtiofsd
+        </code></pre>
+        Tentei resolver o erro com o virtiofs editando a configuração da VM, mas e montando o diretório
+        compartilhado novamente. Depois que isso não funcionou, desisti dessa configuração (que era opcional)
+        e reconfigurei a VM novamente para não usar o virtiofs. Isso resolveu o problema.
+    </p>
+    <p>
+        Seguindo com a configuração, precisei instalar o <code>flex</code> e o <code>bison</code> na minha máquina
+        para gerar a configuração de compilação do kernel.
+    </p>
+
+    <a hx-get="/pages/blog.html"
+       hx-push-url="/blog"
+       hx-target="closest main"
+       hx-swap="outerHTML transition:true show:window:top"
+       class="link-body-emphasis link-underline-opacity-75 link-underline-opacity-25-hover fs-3 mb-3">
+       Voltar
+    </a>
+
+</main>
