@@ -46,7 +46,7 @@
           blogCards.forEach(blogCard => {
             if (blogCard.dataset.category === category || category === "all") {
               let wrapper = document.createElement('div');
-              wrapper.classList.add('col');
+              wrapper.classList.add('col', 'fade-in');
               wrapper.appendChild(blogCard);
               blogsDiv.appendChild(wrapper);
             }
@@ -96,7 +96,7 @@
         setupCategoriesButtons()  // run setup
       }
     </script>
-    <p class="fs-1"> Blog</p>
+    <p class="fs-1 cursor"> Blog</p>
     <p class="fs-3">Categorias</p>
     <div id="categories-div"
          class="nav-underline"
@@ -112,7 +112,7 @@
               data-category="USP">
           <img src="/static/ime.jpg" class="card-img-top" alt="tralalero tralala">
           <div class="card-body">
-            <h3>Caminhos no BCC</h3>
+            <h3 class="card-title typewriter">Caminhos no BCC</h3>
             <p class="card-text fs-6">Meus pensamentos sobre as trilhas do curso.</p>
           </div>
           <div class="card-footer">
@@ -129,7 +129,7 @@
               data-category="USP">
           <img src="/static/monkeyride.gif" class="card-img-top" alt="homem e ">
           <div class="card-body">
-            <h3 class="card-title">MAC0214</h3>
+            <h3 class="card-title typewriter">MAC0214</h3>
             <p class="card-text fs-6">Atividade Curricular em Cultura e Extensão.</p>
           </div>
           <div class="card-footer">
@@ -146,11 +146,28 @@
               data-category="Software Livre">
           <img src="/static/linuxstep.jpeg" class="card-img-top" alt="homem e ">
           <div class="card-body">
-            <h3 class="card-title">Tutorial 1 FLUSP</h3>
+            <h3 class="card-title typewriter">Tutorial 1 FLUSP</h3>
             <p class="card-text fs-6">Configurando ambiente com QEMU e libvirt</p>
           </div>
           <div class="card-footer">
             <small class="text-body-secondary">11 de Março, 2026</small>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 blog-post"
+              hx-get="/pages/blogs/mac470/blog2.html"
+              hx-push-url="/blog/flusp2"
+              hx-target="closest main"
+              hx-swap="outerHTML transition:true show:window:top"
+              data-category="Software Livre">
+          <img src="/static/linuxstep.jpeg" class="card-img-top" alt="homem e ">
+          <div class="card-body">
+            <h3 class="card-title typewriter">Tutorial 2 FLUSP</h3>
+            <p class="card-text fs-6">Compilando e iniciando um kernel linux para ARM</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-body-secondary">18 de Março, 2026</small>
           </div>
         </div>
       </div>

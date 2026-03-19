@@ -159,6 +159,31 @@
         to { transform: translateX(-90px); }
       }
 
+      @keyframes fade-in-element {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .fade-in {
+        animation: 0.3s cubic-bezier(0.4, 0, 1, 1) forwards fade-in-element;
+      }
+
+      .cursor::after {
+        content: '|';
+        color: var(--bs-body-bg-ops);
+        font-weight: bold;
+        animation: cursor-blink 1s infinite;
+      }
+
+      @keyframes cursor-blink {
+        from, to { color: transparent }
+        50% { color: var(--bs-body-bg-ops); }
+      }
+
       ::view-transition-old(slide-it) {
         animation: 100ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
         200ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
@@ -430,7 +455,7 @@
           <hr class="opacity-50 my-1">
           <div class="row row-cols-1 row-cols-sm-2 g-1">
             <span class="fs-6 text-center text-sm-end text-body-secondary mb-0">© 2025 Kaiky Cintra.</span>
-            <span class="fs-6 text-center text-sm-start text-body-secondary mb-0"> Last Updated: 2026-03-18</span>
+            <span class="fs-6 text-center text-sm-start text-body-secondary mb-0"> Last Updated: 2026-03-19</span>
           </div>
         </footer>
 
@@ -463,6 +488,8 @@
                 pageToLoad = '/pages/blogs/mac0102.html';
             } else if (path.endsWith('/blog/flusp1')) {
                 pageToLoad = '/pages/blogs/mac470/blog1.html';
+            } else if (path.endsWith('/blog/flusp2')) {
+                pageToLoad = '/pages/blogs/mac470/blog2.html';
             } else if (path.endsWith('/blog/mac0215')) {
                 pageToLoad = '/pages/blogs/mac0215.html';
             } else if (path.endsWith('/inicio')) {
