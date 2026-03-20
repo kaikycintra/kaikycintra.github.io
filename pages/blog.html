@@ -1,100 +1,151 @@
 <main class="main-transition" style="padding-bottom: 25px;">
     <script>
       {
-        if (Boolean(window.localStorage.getItem('secret'))) {
-          let cardsdiv = document.querySelector('main div')
-          let secretcard = document.createElement('div')
-          secretcard.classList.add('col')
-          secretcard.innerHTML = `
-          <div class="card h-100"
-              hx-get="/pages/blogs/secret.html"
-              hx-target="closest main"
-              hx-swap="outerHTML transition:true show:window:top">
-            <img src="/static/black.png" class="card-img-top" alt="homem e ">
-            <div class="card-body">
-              <h3 class="card-title">Coldplay vs Queen</h3>
-              <p class="card-text fs-6">Entrada secreta do blog.</p>
-            </div>
-            <div class="card-footer">
-              <small class="text-body-secondary">15 de julho, 2025</small>
+        async function getBlogs() {
+          try {
+            const response = await fetch('pages/blogs/blogs.json');
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return await response.json();
+          } catch (error) {
+            console.error('There has been a problem with your fetch operation:', error);
+          }
+        }
+
+        function renderBlog(blogData) {
+          let blog = blogData
+          const HTMLString =
+          `
+          <div class="col">
+            <div class="card h-100 blog-post"
+                hx-get="/pages/blogs/${blog.path}"
+                hx-push-url="/blog/${blog.url}"
+                hx-target="closest main"
+                hx-swap="outerHTML transition:true show:window:top"
+                data-category="${blog.category}">
+              <img src="/static/${blog.image}" class="card-img-top" alt="tralalero tralala">
+              <div class="card-body">
+                <h3 class="card-title typewriter">${blog.title}</h3>
+                <p class="card-text fs-6">${blog.description}</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-body-secondary">${blog.date}</small>
+              </div>
             </div>
           </div>
           `
-         cardsdiv.appendChild(secretcard)
-         window.localStorage.removeItem('secret')
+          let helper = document.createElement('div')
+            
+          helper.innerHTML = HTMLString.trim()
+          const blogElement = helper.firstElementChild
+          const blogsDiv = document.getElementById('blogs-div')
+
+          blogsDiv.appendChild(blogElement)
         }
 
-        // global variables for page
-
-        let blogCards = document.getElementsByClassName('blog-post')
-        let categoriesDiv = document.getElementById('categories-div')
-        let blogsDiv = document.getElementById('blogs-div')
-        let buttonClasses = ['nav-link', 'fs-5']
-
-        // initialize IDs
-        for(let i = 0; i < blogCards.length; i++) {
-          blogCards.id = `blogCard${i}`
-        }
-
-        // store blogCards as initial state, not HTMLCollection
-        blogCards = Array.from(document.getElementsByClassName('blog-post'))
-
-
-        function filterCategory(category) {
-          blogsDiv.innerHTML = ''
-
-          blogCards.forEach(blogCard => {
-            if (blogCard.dataset.category === category || category === "all") {
-              let wrapper = document.createElement('div');
-              wrapper.classList.add('col', 'fade-in');
-              wrapper.appendChild(blogCard);
-              blogsDiv.appendChild(wrapper);
-            }
-          })
-        }
-
-        function styleButton(button) {
-          buttonClasses.forEach(buttonClass => {
-            button.classList.add(buttonClass)
-          })
-        }
-
-        function createUnfilterButton() {
-          let button = document.createElement('button')
-          button.innerText = 'Todos'
-          button.addEventListener('click', event => {
-            filterCategory('all')
-          })
-
-          return button
-        }
-
-        function setupCategoriesButtons() {
-          let categories = new Set()
-          blogCards.forEach(blogCard => {
-            let category = blogCard.dataset.category
-            categories.add(category)
-          });
+        function renderCategories() {
+          let blogCards = document.getElementsByClassName('blog-post')
+          let categoriesDiv = document.getElementById('categories-div')
+          let buttonClasses = ['nav-link', 'fs-5']
   
-          categories.forEach(category => {
-            let anchor = document.createElement('a')
-            anchor.innerText = category
-            anchor.addEventListener('click', event => {
-              filterCategory(category)
+          // initialize ids
+          for(let i = 0; i < blogCards.length; i++) {
+            blogCards[i].id = i
+          }
+  
+          // store blogCards as initial state, not HTMLCollection
+          blogCards = Array.from(document.getElementsByClassName('blog-post'))
+  
+  
+          function filterCategory(category) {
+            const blogsDiv = document.getElementById('blogs-div')
+            blogsDiv.innerHTML = ''
+  
+            blogCards.forEach(blogCard => {
+              if (blogCard.dataset.category === category || category === "all") {
+                let wrapper = document.createElement('div');
+                wrapper.classList.add('col', 'fade-in');
+                wrapper.appendChild(blogCard);
+                blogsDiv.appendChild(wrapper);
+              }
+            })
+          }
+  
+          function styleButton(button) {
+            buttonClasses.forEach(buttonClass => {
+              button.classList.add(buttonClass)
+            })
+          }
+  
+          function createUnfilterButton() {
+            let button = document.createElement('button')
+            button.innerText = 'Todos'
+            button.addEventListener('click', event => {
+              filterCategory('all')
             })
   
-            styleButton(anchor)
+            return button
+          }
   
-            categoriesDiv.appendChild(anchor)
-          })
+          function setupCategoriesButtons() {
+            let categories = new Set()
+            blogCards.forEach(blogCard => {
+              let category = blogCard.dataset.category
+              categories.add(category)
+            });
+    
+            categories.forEach(category => {
+              let anchor = document.createElement('a')
+              anchor.innerText = category
+              anchor.addEventListener('click', event => {
+                filterCategory(category)
+              })
+    
+              styleButton(anchor)
+    
+              categoriesDiv.appendChild(anchor)
+            })
+    
+            let unfilterButton = createUnfilterButton()
+            styleButton(unfilterButton)
+            categoriesDiv.prepend(unfilterButton)
+          }
   
-          let unfilterButton = createUnfilterButton()
-          styleButton(unfilterButton)
-          categoriesDiv.prepend(unfilterButton)
+          setupCategoriesButtons()
         }
 
-        setupCategoriesButtons()  // run setup
-      }
+        async function renderBlogPage() {
+          const blogsDiv = document.getElementById('blogs-div')
+
+          let blogs = await getBlogs()
+          if (blogs) {
+            blogs = blogs.filter(obj => obj.category !== "Secreto")
+            blogs.forEach(blog => renderBlog(blog))
+            htmx.process(blogsDiv);
+          }
+
+          renderCategories()
+        }
+
+        async function RenderSecret() {
+          const blogsDiv = document.getElementById('blogs-div')
+
+          if (Boolean(window.localStorage.getItem('secret'))) {
+            let blogs = await getBlogs()
+            if (blogs) {
+              let secretBlog = blogs.find(obj => obj.category == "Secreto")
+              renderBlog(secretBlog)
+              htmx.process(blogsDiv);
+            }
+            window.localStorage.removeItem('secret')
+          }
+        }
+        
+        renderBlogPage()
+        RenderSecret()
+    }
+
     </script>
     <p class="fs-1 cursor"> Blog</p>
     <p class="fs-3">Categorias</p>
@@ -103,73 +154,5 @@
          style="display: flex; width: 100%; overflow-x: scroll; margin-bottom: 1rem; gap: 1rem;">
     </div>
     <div id="blogs-div" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-      <div class="col">
-        <div class="card h-100 blog-post"
-              hx-get="/pages/blogs/mac0102.html"
-              hx-push-url="/blog/trilhas"
-              hx-target="closest main"
-              hx-swap="outerHTML transition:true show:window:top"
-              data-category="USP">
-          <img src="/static/ime.jpg" class="card-img-top" alt="tralalero tralala">
-          <div class="card-body">
-            <h3 class="card-title typewriter">Caminhos no BCC</h3>
-            <p class="card-text fs-6">Meus pensamentos sobre as trilhas do curso.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-body-secondary">7 de Abril, 2025</small>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 blog-post"
-              hx-get="/pages/blogs/mac0214.html"
-              hx-push-url="/blog/mac0214"
-              hx-target="closest main"
-              hx-swap="outerHTML transition:true show:window:top"
-              data-category="USP">
-          <img src="/static/monkeyride.gif" class="card-img-top" alt="homem e ">
-          <div class="card-body">
-            <h3 class="card-title typewriter">MAC0214</h3>
-            <p class="card-text fs-6">Atividade Curricular em Cultura e Extensão.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-body-secondary">20 de Agosto, 2025</small>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 blog-post"
-              hx-get="/pages/blogs/mac470/blog1.html"
-              hx-push-url="/blog/flusp1"
-              hx-target="closest main"
-              hx-swap="outerHTML transition:true show:window:top"
-              data-category="Software Livre">
-          <img src="/static/linuxstep.jpeg" class="card-img-top" alt="homem e ">
-          <div class="card-body">
-            <h3 class="card-title typewriter">Tutorial 1 FLUSP</h3>
-            <p class="card-text fs-6">Configurando ambiente com QEMU e libvirt</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-body-secondary">11 de Março, 2026</small>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 blog-post"
-              hx-get="/pages/blogs/mac470/blog2.html"
-              hx-push-url="/blog/flusp2"
-              hx-target="closest main"
-              hx-swap="outerHTML transition:true show:window:top"
-              data-category="Software Livre">
-          <img src="/static/linuxstep.jpeg" class="card-img-top" alt="homem e ">
-          <div class="card-body">
-            <h3 class="card-title typewriter">Tutorial 2 FLUSP</h3>
-            <p class="card-text fs-6">Compilando e iniciando um kernel linux para ARM</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-body-secondary">18 de Março, 2026</small>
-          </div>
-        </div>
-      </div>
     </div>
 </main>

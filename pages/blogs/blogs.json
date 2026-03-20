@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Caminhos no BCC",
+    "description": "Meus pensamentos sobre as trilhas do curso.",
+    "date": "7 de Abril, 2025",
+    "url": "trilhas",
+    "path": "mac0102.html",
+    "image": "ime.jpg",
+    "category": "USP"
+  },
+  {
+    "title": "MAC0214",
+    "description": "Atividade Curricular em Cultura e Extensão.",
+    "date": "20 de Agosto, 2025",
+    "url": "mac0214",
+    "path": "mac0214.html",
+    "image": "monkeyride.gif",
+    "category": "USP"
+  },
+  {
+    "title": "Tutorial 1 FLUSP",
+    "description": "Configurando ambiente com QEMU e libvirt",
+    "date": "11 de Março, 2026",
+    "url": "flusp1",
+    "path": "mac470/blog1.html",
+    "image": "linuxstep.jpeg",
+    "category": "Software Livre"
+  },
+  {
+    "title": "Tutorial 2 FLUSP",
+    "description": "Compilando e iniciando um kernel linux para ARM",
+    "date": "18 de Março, 2026",
+    "url": "flusp2",
+    "path": "mac470/blog2.html",
+    "image": "linuxstep.jpeg",
+    "category": "Software Livre"
+  },
+  {
+    "title": "Coldplay vs Queen",
+    "description": "Entrada secreta do blog.",
+    "date": "15 de julho, 2025",
+    "url": "secret",
+    "path": "secret.html",
+    "image": "black.png",
+    "category": "Secreto"
+  }
+]
