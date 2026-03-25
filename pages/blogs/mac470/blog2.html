@@ -14,9 +14,9 @@
     <p>
         Não consegui rodar a VM e tive que voltar ao tutorial 1, ela aparecia como shut off e não iniciava.
         <pre><code>
-            (LK-DEV) root@ubuntudokaiky:/home/lk_dev# virsh start arm64
-            > error: Failed to start domain 'arm64'
-            > error: operation failed: Unable to find a satisfying virtiofsd
+    (LK-DEV) root@ubuntudokaiky:/home/lk_dev# virsh start arm64
+    > error: Failed to start domain 'arm64'
+    > error: operation failed: Unable to find a satisfying virtiofsd
         </code></pre>
         Tentei resolver o erro com o virtiofs editando a configuração da VM, mas e montando o diretório
         compartilhado novamente. Depois que isso não funcionou, desisti dessa configuração (que era opcional)
@@ -25,6 +25,34 @@
     <p>
         Seguindo com a configuração, precisei instalar o <code>flex</code> e o <code>bison</code> na minha máquina
         para gerar a configuração de compilação do kernel.
+    </p>
+
+    <p>
+        Na parte 4 do tutorial eu tive um erro ao instalar os módulos dentro da VM depois de fazer o mount do rootfs
+        <pre><code>
+    (LK-DEV) root@ubuntudokaiky:/home/lk_dev# sudo --preserve-env make -C "${IIO_TREE}" modules_install
+    > make: Entering directory '/home/lk_dev/iio'
+    > SYMLINK /home/lk_dev/vm/arm64_rootfs/lib/modules/7.0.0-rc1meukernel+/build
+    > ln: failed to create symbolic link '/home/lk_dev/vm/arm64_rootfs/lib/modules/7.0.0-rc1meukernel+/build': Invalid argument
+    > make[2]: *** [scripts/Makefile.modinst:22: /home/lk_dev/vm/arm64_rootfs/lib/modules/7.0.0-rc1meukernel+/build] Error 1
+    > make[1]: *** [/home/lk_dev/iio/Makefile:2007: modules_install] Error 2
+    > make: *** [Makefile:248: __sub-make] Error 2
+    > make: Leaving directory '/home/lk_dev/iio'
+        </code></pre>
+        Depois de tentar fazer o mount novamente e encontrar um erro (diferente da primeira execução),
+        eu rodei o comando pela terceira vez com trace e debug
+        <pre><code>
+    export LIBGUESTFS_DEBUG=1
+    export LIBGUESTFS_TRACE=1
+        </code></pre>
+        E o erro vinha de uma incapacidade do qemu de ter um write lock na imagem <code>/home/lk_dev/vm/arm64_img.qcow2</code>.
+        Como isso poderia ser resultado de um outro processo mantendo um write lock eu rodei o comando abaixo para verificar:
+        <pre><code>
+    sudo fuser -v /home/lk_dev/vm/arm64_img.qcow2
+        </code></pre>
+        E o chute estava correto! Depois de identificar o processo que estava escrevendo indefinidamente
+        ao arquivo bastou encerrá-lo e rodar os comandos do tutorial novamente para que o mount e a instalação
+        dos módulos funcionasse.
     </p>
 
     <a hx-get="/pages/blog.html"
