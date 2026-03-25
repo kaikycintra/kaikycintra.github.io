@@ -3,7 +3,7 @@
       {
         async function getBlogs() {
           try {
-            const response = await fetch('pages/blogs/blogs.json');
+            const response = await fetch('/pages/blogs/blogs.json');
             if (!response.ok) {
               throw new Error('Network response was not ok');
             }
@@ -119,11 +119,9 @@
           const blogsDiv = document.getElementById('blogs-div')
 
           let blogs = await getBlogs()
-          if (blogs) {
-            blogs = blogs.filter(obj => obj.category !== "Secreto")
-            blogs.forEach(blog => renderBlog(blog))
-            htmx.process(blogsDiv);
-          }
+          blogs = blogs.filter(obj => obj.category !== "Secreto")
+          blogs.forEach(blog => renderBlog(blog))
+          htmx.process(blogsDiv);
 
           renderCategories()
         }

@@ -1,11 +1,5 @@
 <main class="main-transition fs-5">
-    <a hx-get="/pages/blog.html"
-       hx-push-url="/blog"
-       hx-target="closest main"
-       hx-swap="outerHTML transition:true show:window:top"
-       class="link-body-emphasis link-underline-opacity-75 link-underline-opacity-25-hover fs-3 mb-3">
-       Voltar
-    </a>
+    <script src="/static/blogscript.js"></script>
     <p class="fs-1 fw-semibold mb-0">MAC0214</p>
     <p class="fs-5 fw-semibold text-muted mb-0">20 de Agosto, 2025</p>
     <p class="fs-5 fw-semibold text-muted">Atualizado em 29 de Setembro, 2025</p>
@@ -77,12 +71,7 @@
     
 
 
-    <a hx-get="/pages/blog.html"
-       hx-push-url="/blog"
-       hx-target="closest main"
-       hx-swap="outerHTML transition:true show:window:top"
-       class="link-body-emphasis link-underline-opacity-75 link-underline-opacity-25-hover fs-3 mb-3">
-       Voltar
-    </a>
-
+    <div id="related-entries"
+         class="custom-scroll">
+    </div>
 </main>

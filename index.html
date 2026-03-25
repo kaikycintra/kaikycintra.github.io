@@ -57,6 +57,38 @@
         display: none;
       }
 
+      .custom-scroll {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1rem;
+        padding: 0.5rem 0.25rem;
+        
+        /* Firefox support */
+        scrollbar-width: thin;
+        scrollbar-color: var(--bs-body-bg-ops) transparent;
+      }
+
+      /* Chrome, Edge, Safari support */
+      .custom-scroll::-webkit-scrollbar {
+        display: block;
+        height: 8px;
+      }
+
+      .custom-scroll::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .custom-scroll::-webkit-scrollbar-thumb {
+        background-color: var(--bs-body-bg-ops);
+        border-radius: 10px;
+        border: 2px solid var(--bs-body-bg);
+      }
+
+      .custom-scroll > * {
+          scroll-snap-align: start;
+      }
+
       [data-bs-theme=light] {
         --bs-body-bg: var(--light-bg);
         --bs-body-bg-ops: var(--dark-bg);
@@ -88,7 +120,8 @@
         align-items: center;
         background-color: var(--bs-body-bg);
         overflow-y: scroll;
-        -ms-overflow-style:none;
+        -ms-overflow-style:none; /* removendo estilo padrão da scrollbar */
+        scrollbar-width: none;
       }
 
       #page-content, footer {
@@ -222,6 +255,16 @@
 
       [data-bs-theme=light] .card:hover, .card:active {
         box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.37);
+      }
+
+      .blog-post {
+          width: 18rem;  
+      }
+
+      .blog-post .card-title {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
       }
 
       .theme-icon-active,
