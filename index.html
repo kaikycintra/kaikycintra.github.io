@@ -568,15 +568,17 @@
               });
             });
 
-            document.body.addEventListener('htmx:pushedIntoHistory', () => {
-              const delta = 1; // max radians to change per axis
+            document.body.addEventListener('htmx:afterSettle', (event) => {
+              if (event.target.tagName.toLowerCase() === 'main') {
+                const delta = 1
 
-              targetCamAngleX = camAngleX + random(-delta, delta);
-              targetCamAngleY = camAngleY + random(-delta, delta);
-              targetCamAngleZ = camAngleZ + random(-delta, delta);
+                targetCamAngleX = camAngleX + random(-delta, delta);
+                targetCamAngleY = camAngleY + random(-delta, delta);
+                targetCamAngleZ = camAngleZ + random(-delta, delta);
 
-              loop(); // Resume animation to allow smooth transition
-            });
+                loop()
+              }
+            })
           });
         </script>
     </body>
