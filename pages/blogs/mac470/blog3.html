@@ -1,0 +1,39 @@
+<main class="main-transition fs-5">
+    <script src="/static/blogscript.js"></script>
+    <p class="fs-1 fw-semibold mb-0">Tutorial 3 Flusp</p>
+    <p class="fs-5 fw-semibold text-muted">16 Junho, 2026</p>
+    <hr class="opacity-50">
+    
+    <p class="fs-3 fw-semibold">Introduction to Linux kernel build configuration and modules</p>
+    <p>
+        Fiquei travado no mount por um tempo ao fazer esse tutorial.
+        <pre><code>
+        sudo --preserve-env make -C "${IIO_TREE}" modules_install
+        sudo guestmount --rw --add "${VM_DIR}/arm64_img.qcow2" --mount /dev/<rootfs> "${VM_MOUNT_POINT}"
+        </code></pre>
+        
+        O comando modules_install não funcionava, então usei o fuser para achar processo
+        que estava com o write lock (igual o erro descrito no blog do tutorial 2).
+    </p>
+    <p> 
+        <pre><code>
+        sudo guestmount --rw --add "${VM_DIR}/arm64_img.qcow2" --mount /dev/<rootfs> "${VM_MOUNT_POINT}"
+        </code></pre>
+
+        Depois o comando acima deu erro indicando que o mountpoint não estava vazio.
+        Então apaguei o diretório do mountpoint e criei de novo, aí o modules_install deu erro.
+        O problema era que <code>cd $VM_MOUNT_POINT</code> retornava invalid argument.
+        Para resolver, usei o fuser no mountpoint, vi que ele era um mount point controlado pelo kernel (esperado),
+        logo o erro provavelmente era que o filesystem do mount estava corrompido.
+        <code>sudo umount -l /home/lk_dev/vm/arm64_rootfs, resolveu</code> resolveu o problema.
+
+    </p>
+    <p>
+        De resto não tive problemas! achei a criação de módulos bem interessante, não imaginava que
+        eles pudessem ser carregados no kernel enquanto ele estivesse rodando de forma tão fácil.
+    </p>
+
+    <div id="related-entries"
+         class="custom-scroll">
+    </div>
+</main>

@@ -28,10 +28,64 @@
   },
   {
     "title": "Tutorial 2 FLUSP",
-    "description": "Compilando e iniciando um kernel linux para ARM",
+    "description": "Compilando e iniciando um kernel Linux para ARM",
     "date": "18 de Março, 2026",
     "url": "flusp2",
     "path": "mac470/blog2.html",
+    "image": "linuxstep.jpeg",
+    "category": "Software Livre"
+  },
+  {
+    "title": "Tutorial 3 FLUSP",
+    "description": "Configuração de build e módulos do kernel Linux",
+    "date": "16 de Junho, 2026",
+    "url": "flusp3",
+    "path": "mac470/blog3.html",
+    "image": "linuxstep.jpeg",
+    "category": "Software Livre"
+  },
+  {
+    "title": "Tutorial 4 FLUSP",
+    "description": "Character Device Drivers do kernel Linux",
+    "date": "16 de Junho, 2026",
+    "url": "flusp4",
+    "path": "mac470/blog4.html",
+    "image": "linuxstep.jpeg",
+    "category": "Software Livre"
+  },
+  {
+    "title": "Tutorial 5 FLUSP",
+    "description": "Mandando patches por email com git",
+    "date": "16 de Junho, 2026",
+    "url": "flusp5",
+    "path": "mac470/blog5.html",
+    "image": "linuxstep.jpeg",
+    "category": "Software Livre"
+  },
+  {
+    "title": "Tutorial 6 FLUSP",
+    "description": "Mandando patches por email com git e email USP",
+    "date": "16 de Junho, 2026",
+    "url": "flusp6",
+    "path": "mac470/blog6.html",
+    "image": "linuxstep.jpeg",
+    "category": "Software Livre"
+  },
+  {
+    "title": "Tutorial 7 FLUSP",
+    "description": "Anatomia do driver iio_simple_dummy",
+    "date": "16 de Junho, 2026",
+    "url": "flusp7",
+    "path": "mac470/blog7.html",
+    "image": "linuxstep.jpeg",
+    "category": "Software Livre"
+  },
+  {
+    "title": "Tutorial 8 FLUSP",
+    "description": "Experimentando com o iio_simple_dummy",
+    "date": "16 de Junho, 2026",
+    "url": "flusp8",
+    "path": "mac470/blog8.html",
     "image": "linuxstep.jpeg",
     "category": "Software Livre"
   },

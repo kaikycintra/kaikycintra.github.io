@@ -1,0 +1,26 @@
+<main class="main-transition fs-5">
+    <script src="/static/blogscript.js"></script>
+    <p class="fs-1 fw-semibold mb-0">Tutorial 8 Flusp</p>
+    <p class="fs-5 fw-semibold text-muted">16 Junho, 2026</p>
+    <hr class="opacity-50">
+    
+    <p class="fs-3 fw-semibold">IIO Dummy module Experiment One: Play with iio_dummy</p>
+    <p>
+        O processo de carregar o módulo iio_dummy na VM foi um pouco chato
+        Depois de atualizar o .config com o nconfig eu tentei dar make no módulo
+        com <code>make -C "$IIO_TREE" M=drivers/iio/dummy</code> mas tive erros.
+    </p>
+    <p>
+        Tentei consertar com <code>make -C "$IIO_TREE" modules</code> e
+        alguns foram resolvidos, mas tinham dois erros relacionados ao IRQ_SIM que não resolveram.
+        Então tentei limpar artefatos das compilações antigas e compilar a imagem e módulos novamente,
+        e isso funcionou.
+    </p>
+    <p>
+        O resto do tutorial fluiu bem, tirando alguns erros de sintaxe na hora de compilar o iio_dummy atualizado.
+    </p>
+
+    <div id="related-entries"
+         class="custom-scroll">
+    </div>
+</main>

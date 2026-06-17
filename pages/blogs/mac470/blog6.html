@@ -1,0 +1,39 @@
+<main class="main-transition fs-5">
+    <script src="/static/blogscript.js"></script>
+    <p class="fs-1 fw-semibold mb-0">Tutorial 6 Flusp</p>
+    <p class="fs-5 fw-semibold text-muted">16 Junho, 2026</p>
+    <hr class="opacity-50">
+    
+    <p class="fs-3 fw-semibold">Sending patches with git and a USP email</p>
+    <p>
+        Não segui os quadrados amarelos já que
+        pareciam desatualizados e não lembrava de terem sido mencionados na aula.
+    </p>
+    <p>
+        Ao tentar enviar o patch para mim mesmo com o email USP, recebi o erro:
+        <pre><code>
+        No SASL mechanism found
+        at /usr/share/perl5/Authen/SASL.pm line 76.
+        at /usr/share/perl/5.38/Net/SMTP.pm line 211.
+        </code></pre>
+        
+        Li no repositório que era necessária versão 2.18+ da biblioteca
+        <code>perl's Authen::SASL</code> para usar OAuth2.0. Então verifiquei a minha versão:
+        <pre><code>
+        apt list | grep authen
+        >libauthen-sasl-perl/noble,noble,now 2.1700-1 all [installed]
+        </code></pre>
+
+        Como <code>apt upgrade</code> não funcionou (a versão do ubuntu limitou a versão da biblioteca),
+        eu tive que consertar com
+
+        <pre><code>
+        sudo apt-get install cpanminus
+        sudo cpanm Authen::SASL
+        </code></pre>
+    </p>
+
+    <div id="related-entries"
+         class="custom-scroll">
+    </div>
+</main>

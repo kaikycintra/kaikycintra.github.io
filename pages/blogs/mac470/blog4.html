@@ -1,0 +1,32 @@
+<main class="main-transition fs-5">
+    <script src="/static/blogscript.js"></script>
+    <p class="fs-1 fw-semibold mb-0">Tutorial 4 Flusp</p>
+    <p class="fs-5 fw-semibold text-muted">16 Junho, 2026</p>
+    <hr class="opacity-50">
+    
+    <p class="fs-3 fw-semibold">Introduction to Linux kernel Character Device Drivers</p>
+    <p>
+        Foi bem interessante entender melhor como um driver e device files funcionam.
+        Sempre tive essa curiosidade, apesar de ser mais relacionada a sinais enviados por hardware,
+        o que não foi ilustrado com o nosso driver simples.
+        Para sanar a minha curiosidade, li código do driver do 
+        <a href="https://github.com/telmich/gpm/blob/master/src/mice.c"
+           target="_blank">general purpose mouse</a>.
+    </p>
+    <p>
+        Bem ao final do tutorial percebi que o write_prog não estava funcionando,
+        aparentemente o open retornava um erro 9 (bad file descriptor).
+        Apesar disso o <code>lsmod</code> mostrava o módulo simple_char carregado
+        e adicionar permissões de escrita no simple_char_node não resolveu.
+    </p>
+    <p>
+        Debugando eu percebi que o major passado para o <code>mknod</code>
+        quando criei o simple_char_node estava errado
+        usei <code>cat /proc/devices | grep simple</code> e obtive o número certo,
+        os testes funcionaram depois de recriar o device file!
+    </p>
+
+    <div id="related-entries"
+         class="custom-scroll">
+    </div>
+</main>
