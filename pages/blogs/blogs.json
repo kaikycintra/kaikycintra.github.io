@@ -90,6 +90,15 @@
     "category": "Software Livre"
   },
   {
+    "title": "Contribuindo para o GNOME",
+    "description": "Consertando um problema no calendário",
+    "date": "28 de Julho, 2026",
+    "url": "gnome",
+    "path": "mac470/gnome.html",
+    "image": "gnome_logo.png",
+    "category": "Software Livre"
+  },
+  {
     "title": "Coldplay vs Queen",
     "description": "Entrada secreta do blog.",
     "date": "15 de julho, 2025",

@@ -1,0 +1,160 @@
+<main class="main-transition fs-5">
+    <script src="/static/blogscript.js"></script>
+    <p class="fs-1 fw-semibold mb-0">Contribuindo para o GNOME</p>
+    <p class="fs-5 fw-semibold text-muted">28 Julho, 2026</p>
+    <hr class="opacity-50">
+    
+    <p class="fs-3 fw-semibold">Escolhendo o projeto</p>
+    <p>
+        Vasculhando os repositórios do GNOME no GitLab e falando com o Felipe Dayoub, que
+        também contribuiu para o projeto, vimos que o Calendar é um bom aplicativo para iniciantes
+        e decidimos trabalhar em uma issue com a tag 'Newcomers' para ele.
+    </p>
+    
+    <p class="fs-3 fw-semibold">A issue</p>
+    <p>
+        <a href="https://gitlab.gnome.org/groups/GNOME/-/boards?label_name[]=4.+Newcomers&show=eyJpaWQiOiIxMDkyIiwiZnVsbF9wYXRoIjoiR05PTUUvZ25vbWUtY2FsZW5kYXIiLCJpZCI6MTgzOTc0fQ%3D%3D#/"
+           target="_blank">
+           A issue</a>
+
+        trata de um erro da interface que pode causar confusão ao trocar datas de eventos.
+        Ao arrastar eventos para trocá-los de data, o app não registra a mudança se arrastamos um
+        evento sobre outro, apenas os espaços vazios da célula da data são considerados.
+        <video autoplay loop muted playsinline width="100%">
+            <source src="/static/gnome_calendar_broken.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </p>
+    
+    <p class="fs-3 fw-semibold">Descobrindo como contribuir</p>
+    <p>
+        Lemos o tutorial
+        <a href="https://welcome.gnome.org/app/Calendar/"
+           target="_blank">
+           do Calendar</a>
+           que indica um passo a passo quase completo de como contribuir para o aplicativo.
+           Lemos também um pouco do
+           <a href="https://developer.gnome.org/documentation/tutorials/beginners/getting_started.html"
+              target="_blank">
+              tutorial indicado para iniciantes</a>,
+              que foi mais útil posteriormente para descobrir como resolver a issue no nível de código.
+    </p>
+
+    <p class="fs-3 fw-semibold">Build inicial</p>
+    <p>
+        Um dos passos para contribuir para um aplicativo do GNOME é baixar o Builder (a IDE do projeto),
+        clonar o repositório do aplicativo e rodar uma versão dele. Pudemos completar esse passo sem 
+        problemas.
+    </p>
+
+    <p class="fs-3 fw-semibold">Desenvolvendo</p>
+    <p>
+        Lemos o
+        <a href="https://developer.gnome.org/documentation/tutorials/drag-and-drop.html"
+              target="_blank">
+              tutorial de desenvolvimento</a>
+        na seção de drag and drop para entender melhor como funciona a interface nesses casos e como lida
+        com as interações com o mouse. Mas apesar dessa seção existir no tutorial, ela é bem superficial e não
+        cobria alguns aspectos do código do Calendar que lidava com essas interações.
+    </p>
+    <p>
+        Depois precisamos achar em que parte do código do Calendar estava a lógica de drag and drop com o bug da issue.
+        A ideia inicial era comparar a implementação de <code>dnd</code> ao ver o calendário por semana ou por mês
+        (o bug da issue só acontecia ao ver o calendário por mês).
+    </p>
+    <p>
+        Depois de algumas buscas encontramos os arquivos responsáveis pelo comportamento observado, o
+        <code>src/gui/views/gcal-month-cell.c</code> e o <code>src/gui/views/gcal-week-grid.c</code>.
+        Descobrimos que a diferença de comportamento se dava por conta da implementação de <code>dnd</code>
+        ser totalmente diferente na tela de semana e na tela de mês.
+        Na tela de semana o mouse é rastreado na tela toda e a célula de data selecionada é calculada com base na posição do mouse.
+        Enquanto isso, na tela de mês a célula é determinada com base em seções da tela que possuem widgets do gtk
+        (biblioteca do GNOME para criação de GUIs).
+    </p>
+    <p>
+        O bug da issue surge porque os eventos do Calendar estão desenhados sobre os widgets de data.
+        O comportamento padrão do gtk nesse caso passa a responsabilidade de tratar o <code>dnd</code>
+        para o widget do evento, que não tem lógica para isso. Enquanto isso, a interação funciona normalmente
+        na tela por semana porque identificamos a célula de data a partir da posição do mouse, o que independe
+        da possível sobreposição de widgets do gtk.
+    </p>
+    <p>
+        Sabendo disso, nós identificamos o commit que refatorou o <code>dnd</code> na tela de semana
+        e usamos ele de inspiração para migrar a funcionalidade de drag and drop da célula de data para a tela de visualização por mês.
+        Removemos o código de um arquivo e reescrevemos a lógica em outro, programando o que fazer quando o mouse
+        entra, sai, se move ou solta um evento em uma data.
+    </p>
+    <p>
+        Escrever esse código não foi fácil, codar em C não é simples e usar o gtk adicionou um nível a mais de estranheza.
+        Se não tivéssemos encontrado o commit de referência para a migração de lógica seria inviável tratar essa issue
+        sendo iniciante no projeto. Por vezes tivemos que usar funcionalidades de dependências do gtk como o gdk e o graphene,
+        para o qual o uso de uma LLM se mostrou útil para apontar a direção que deveríamos seguir.
+    </p>
+
+    
+    <p class="fs-3 fw-semibold">Buildando e Testando</p>
+    <p>
+        O build da nossa versão foi bem simples e depois de muitas refatorações o teste de arrastar funcionou.
+        No entanto, a parte de destacar a célula selecionada (que tomou quase metade do tempo de desenvolvimento)
+        não funcionou no build inicial ou no build da nossa implementação. 
+    </p>
+    <p>
+        Achamos isso muito estranho, não sabíamos se a main estava quebrada ou se era uma questão de ambiente.
+        A documentação do builder sugeria que essa não era uma questão de incompatibilidade entre a versão do GNOME
+        de destino do código e a dos nossos PCs, mas para verificar baixamos a versão nightly do app pelo flathub.
+        Vimos que a versão nightly também não tinha destaque ao arrastar eventos na tela de mês, suportando a tese
+        de que nosso código não era o problema. Com isso decidimos abrir nosso
+        <a href="https://gitlab.gnome.org/GNOME/gnome-calendar/-/merge_requests/806"
+              target="_blank">
+              Merge Request</a>.
+    </p>
+
+    <video autoplay loop muted playsinline width="100%">
+            <source src="/static/gnome_calendar_working.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+    <p class="fs-3 fw-semibold">Submetendo</p>
+    <p>
+        Tivemos que criar contas no GitLab do Gnome e ler o <code>HACKING.md</code> e o <code>CONTRIBUTING.md</code>
+        para buscar mais informações sobre fazer contribuições que não estavam no tutorial da comunidade.
+        Achamos guias de como criar commits e MRs, mas percebemos que muitos dos desenvolvedores do projeto
+        não seguem as diretrizes definidas, ainda assim tentamos seguí-las.
+    </p>
+
+    <p class="fs-3 fw-semibold">Pós MR</p>
+    <p>
+        Após abrir o MR, uma pipeline de CI rodou e indicou alguns warnings sobre o code style, então decidimos investigar.
+        Como os artefatos do job da pipeline não estavam presentes, tivemos que reproduzir a checagem de estilo localmente.      
+    </p>
+    <p>
+        Olhamos como o job se comportava inspecionando a pasta <code>.gitlab-ci</code>.
+        Nela havia o arquivo <code>.gitlab-ci/clang-format-diff.py</code>, que utiliza o comando
+        <code>clang-format</code> para formatação de código em C.
+        Com ele, podemos montar o comando necessário para checar a formatação:  
+    <p>
+    <pre><code>
+git diff -U0 upstream/main | .gitlab-ci/clang-format-diff.py -binary "clang-format" -p1
+    </code></pre>
+    <p>
+        Assim verificamos mudanças da upstream do GNOME com o nosso código. Isso retornaria todas as diffs necessárias
+        que precisam ser formatadas (em especial, indentações, whitespaces em lugares errados, etc).
+        Mas também havia falsos positivos. 
+        Nestes casos, há definições no arquivo <code>HACKING.md</code> sobre a estrutura e
+        indentação de ponteiros em estruturas e funções, e as indicações mostram que o script
+        pode gerar mensagens falsas às vezes, então, ignoramos e enviamos uma nota aos mantenedores
+        sobre esses falsos positivos.
+    </p>
+    <p>
+        Por fim, ainda não recebemos resposta. Assim como os outros dois grupos que trabalharam no Calendar,
+        tivemos as labels do nosso MR atualizadas pelo
+        <a href="https://gitlab.gnome.org/jfft"
+              target="_blank">
+              Jeff</a>,
+              que é um mantenedor do GNOME, mas não ouvimos mais nada dele ou outros desenvolvedores.
+    </p>
+
+    <div id="related-entries"
+         class="custom-scroll">
+    </div>
+</main>
