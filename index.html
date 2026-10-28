@@ -502,7 +502,7 @@
               <a href="https://creativecommons.org/public-domain/cc0/"
                  target="_blank">
                 CC0</a></span>
-            <span class="fs-6 text-body-secondary"> Last Updated: 2026-07-29</span>
+            <span class="fs-6 text-body-secondary"> Last Updated: 2026-10-28</span>
           </div>
         </footer>
 
@@ -543,6 +543,9 @@
                 pageToLoad = '/pages/home.html';
             } else if (path.endsWith('/reviews')) {
                 pageToLoad = '/pages/reviews.html';
+            } else if (path.endsWith('/ieee')) {
+                window.location.replace('/pages/ieeepresentation.html');
+                return;
             } 
 
             if (pageToLoad == homePage) {
